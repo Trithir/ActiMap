@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MyComponent from './Components/Map'
+import Calen from './Components/Calendar';
 import TodoForm from './Components/todoForm';
 import TodoList from './Components/todoList';
 
@@ -9,10 +9,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Emotional</Text>
-      <TodoList />
+      {/* <TodoList /> */}
       <TodoForm />
         {/* <MyComponent style={styles.map}/> */}
       <Text>ALow</Text>
+      <Calen />
       <StatusBar style="auto" />
     </View>
   );
