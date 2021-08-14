@@ -1,5 +1,5 @@
-# ActiMap
-React Native app for logging/tracking hiking and other outdoor activities.
+# AwesomeProject
+React Native app for logging/tracking health habits.
 
 ## Development
 `npm start`
