@@ -8,13 +8,13 @@ export default function Intake(){
     <Center>
       <Container bg={{
         linearGradient: {
-          colors: ["lightBlue.400", "violet.800"],
+          colors: ["green.400", "violet.800"],
           start: [0, 0],
           end: [1, 0],
         },
         }}
         // width="100%"
-        // height="5%"
+        height="100%"
         // p={10}
         rounded="lg"
         _text={{

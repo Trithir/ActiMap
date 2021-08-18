@@ -1,4 +1,4 @@
-import { Center, Container } from 'native-base';
+import { Center, Container,Text, View } from 'native-base';
 import React from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {Dimensions} from 'react-native';
@@ -32,15 +32,16 @@ export default function Calen() {
     }
 
     return (
-      <Center flex={1}>
-        <Container bg={{
+      // <Center flex={1}>
+        <Container style={{
+          backgroundColor: "green",
           linearGradient: {
             colors: ["lightBlue.300", "violet.800"],
             start: [0, 0],
             end: [1, 0],
           },
           }}
-          width={deviceWidth}
+          // width={200}
           rounded="lg"
           _text={{
             fontSize: "md",
@@ -60,7 +61,7 @@ export default function Calen() {
           }}
           />
         </Container>
-      </Center>
+      // </Center>
     )
 
       // return <CalendarList 

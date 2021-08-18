@@ -11,17 +11,16 @@ export default function TopBar(){
         start: [0, 0],
         end: [1, 0],
         }}}
-        // width="100%"
-        // height="5%"
+        // w="100%"
+        height="100%"
         // p={5}
         rounded="lg"
         _text={{
-          fontSize: "md",
-          fontWeight: "bold",
+          fontSize: "xs",
+          // fontWeight: "bold",
           color: "white",
         }}
-      >
-        Notification Bar filler?
+      > HIDEME
       </Container>
     </Center>
   )

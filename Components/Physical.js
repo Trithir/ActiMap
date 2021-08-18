@@ -1,4 +1,4 @@
-import { Center, Container } from 'native-base';
+import { Center, Container, Button } from 'native-base';
 import React from 'react';
 import {Dimensions} from 'react-native';
 
@@ -8,14 +8,16 @@ export default function Physical(){
     <Center>
       <Container bg={{
         linearGradient: {
-          colors: ["lightBlue.600", "violet.800"],
+          colors: ["teal.400", "violet.800"],
           start: [0, 0],
           end: [1, 0],
         },
         }}
-        width="100%"
-        // height="4%"
-        // p={10}
+        style= {{
+          flex: 1
+        }}
+        // width="100%"
+        height="100%"
         rounded="lg"
         _text={{
           fontSize: "md",
@@ -23,6 +25,9 @@ export default function Physical(){
           color: "white",
         }}
         >
+          <Button size={'sm'}>
+            Hike
+          </Button>
         Lets get physical!
       </Container>
     </Center>

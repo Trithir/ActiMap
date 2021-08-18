@@ -8,13 +8,13 @@ export default function Mental(){
     <Center>
       <Container bg={{
           linearGradient: {
-            colors: ["lightBlue.500", "violet.800"],
+            colors: ["yellow.400", "violet.800"],
             start: [0, 0],
             end: [1, 0],
           },
           }}
-          // width="100%"
-          // height="5%"
+          width="100%"
+          height="100%"
           // p={10}
           rounded="lg"
           _text={{
