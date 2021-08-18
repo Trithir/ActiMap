@@ -1,4 +1,6 @@
 # AwesomeProject
+Set simple habits to enhance well-being!
+
 React Native app for logging/tracking health habits.
 
 ## Development

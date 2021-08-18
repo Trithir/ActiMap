@@ -3,7 +3,7 @@ import {Dimensions} from 'react-native';
 
 export function useOrientation(){
   const [orientation, setOrientation] = useState("PORTRAIT");
-
+ 
   useEffect(() => {
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
       if (width<height) {
@@ -12,7 +12,6 @@ export function useOrientation(){
       } else {
         setOrientation("LANDSCAPE")
         Dimensions.removeEventListener('change', ({window:{width,height}}))
-    
       }
     })
 

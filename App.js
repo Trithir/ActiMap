@@ -5,7 +5,12 @@ import TodoForm from './Components/todoForm';
 import TodoList from './Components/todoList';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { useOrientation } from './Components/Orientation'; 
-import { Box, Center, NativeBaseProvider } from "native-base"
+import { Box, Center, NativeBaseProvider, Container } from "native-base"
+import Physical from './Components/Physical';
+import Mental from './Components/Mental';
+import Intake from './Components/Intake';
+import TopBar from './Components/TopBar';
+import {Dimensions} from 'react-native';
 
 
 export default function App() {
@@ -15,108 +20,21 @@ export default function App() {
     }
   }
 
-  console.log(useOrientation())
+    // let high = window.height
+    // let wide = window.width
+  
+    // console.log(window.height)
   return (
     
     useOrientation() == "PORTRAIT" ?
     <NativeBaseProvider config={config}>
-    <Grid style={styles.container}>
-      <Row size={5}>
-      <Center flex={1}>
-        <Box bg={{ linearGradient: {
-          colors: ["orange.600", "violet.800"],
-          start: [0, 0],
-          end: [1, 0],
-          }}}
-          width="100%"
-          height="5%"
-          p={5}
-          rounded="lg"
-          _text={{
-            fontSize: "md",
-            fontWeight: "bold",
-            color: "white",
-          }}
-        >
-          Topist of the small boxes
-        </Box></Center></Row>
-      <Row size={10}><Box bg={{
-          linearGradient: {
-            colors: ["lightBlue.600", "violet.800"],
-            start: [0, 0],
-            end: [1, 0],
-          },
-          }}
-          width="100%"
-          height="4%"
-          p={10}
-          rounded="lg"
-          _text={{
-            fontSize: "md",
-            fontWeight: "bold",
-            color: "white",
-          }}
-        >
-          Almost top of the small boxes
-        </Box></Row>
-      <Row size={10}><Box bg={{
-          linearGradient: {
-            colors: ["lightBlue.500", "violet.800"],
-            start: [0, 0],
-            end: [1, 0],
-          },
-          }}
-          width="100%"
-          height="10%"
-          p={10}
-          rounded="lg"
-          _text={{
-            fontSize: "md",
-            fontWeight: "bold",
-            color: "white",
-          }}
-        >
-          Small Box above bottom small box
-        </Box></Row>
-      <Row size={10}><Box bg={{
-        linearGradient: {
-          colors: ["lightBlue.400", "violet.800"],
-          start: [0, 0],
-          end: [1, 0],
-        },
-        }}
-        width="100%"
-        height="12%"
-        p={10}
-        rounded="lg"
-        _text={{
-          fontSize: "md",
-          fontWeight: "bold",
-          color: "white",
-        }}
-      >
-        Bottom small box
-      </Box></Row>
-      <Row size={50}><Box bg={{
-          linearGradient: {
-            colors: ["lightBlue.300", "violet.800"],
-            start: [0, 0],
-            end: [1, 0],
-          },
-          }}
-          width="100%"
-
-          p={10}
-          rounded="lg"
-          _text={{
-            fontSize: "md",
-            fontWeight: "bold",
-            color: "white",
-          }}
-        >
-          <Calen/>
-        </Box></Row>
-    </Grid>
+      <Center flex={1} width="100%">
+        <TopBar/>
+        <Physical/>
+        <Mental/>
+        <Intake/>
+        <Calen/>
+      </Center>
     </NativeBaseProvider>
     :
     <NativeBaseProvider config={config}>
@@ -138,7 +56,7 @@ export default function App() {
         >
           Topist of the small boxes
         </Box></Row>
-      <Row size={10}><Text>{useOrientation()}</Text></Row>
+      <Row size={10}><Text>Landscape</Text></Row>
       <Row size={10}><TodoForm/></Row>
       <Row size={12}><Text>ALow</Text></Row>
       </Col>
@@ -146,6 +64,7 @@ export default function App() {
     </Grid>
     </NativeBaseProvider>
     );
+
 }
 
 const styles = StyleSheet.create({

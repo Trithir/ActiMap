@@ -1,32 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput, Text } from "react-native";
 
-// function handleChange(props) {
-  
-// }
-
-// function TodoForm(props) {
-//   const [newTodo, setNewTodo] = useState('')
-
-//   return (
-//     <form>
-//       <input 
-//         type='text' 
-//         placeholder='Add todo'
-//         value= ''
-//       />
-//       <input 
-//         type='submit' 
-//         value='submit' 
-//       />
-//     </form>
-//   );
-// }
-
-// export default TodoForm;
-
-
-
 const UselessTextInput = () => {
   const [text, onChangeText] = React.useState(null);
   // const [number, onChangeNumber] = React.useState(null);
