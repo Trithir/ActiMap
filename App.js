@@ -47,15 +47,13 @@ export default function App() {
     useOrientation() == "PORTRAIT" ?
     <NativeBaseProvider config={config} >
       {/* <ViewBoxesWithColorAndText/> */}
-      <Center flex={1} >
         <Grid style={styles.container}>
-          <Row size={1}><TopBar/></Row>
+          <Row size={3.5}><TopBar/></Row>
           <Row size={13}><Physical/></Row>
           <Row size={13}><Mental/></Row>
           <Row size={13}><Intake/></Row>
           <Row size={50}><Calen/></Row>
           </Grid>
-      </Center>
     </NativeBaseProvider>
     :
     <NativeBaseProvider config={config}>

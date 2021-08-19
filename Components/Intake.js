@@ -1,30 +1,27 @@
-import { Center, Container } from 'native-base';
+import { Center, Container, Box } from 'native-base';
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, View, Text} from 'react-native';
 
 export default function Intake(){
 
   return (
-    <Center>
-      <Container bg={{
+      <Box 
+      bg={{
         linearGradient: {
           colors: ["green.400", "violet.800"],
           start: [0, 0],
           end: [1, 0],
         },
         }}
-        // width="100%"
+        width="100%"
         height="100%"
-        // p={10}
         rounded="lg"
         _text={{
           fontSize: "md",
-          fontWeight: "bold",
           color: "white",
         }}
       >
         The substances we intake make a difference!
-      </Container>
-    </Center>
+      </Box>
   )
 }

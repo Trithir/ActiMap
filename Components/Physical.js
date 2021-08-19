@@ -1,22 +1,24 @@
-import { Center, Container, Button } from 'native-base';
-import React from 'react';
-import {Dimensions} from 'react-native';
+import { Center, Container, Button, Box } from 'native-base';
+import * as React from 'react';
+import {Dimensions, View, Text, StyleSheet} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function Physical(){
 
   return (
-    <Center>
-      <Container bg={{
-        linearGradient: {
-          colors: ["teal.400", "violet.800"],
-          start: [0, 0],
-          end: [1, 0],
-        },
+      <Box 
+        bg={{
+          linearGradient: {
+            colors: ["teal.400", "violet.800"],
+            start: [0, 0],
+            end: [1, 0],
+          },
         }}
         style= {{
-          flex: 1
+          flex: 1,
         }}
-        // width="100%"
+        width="100%"
         height="100%"
         rounded="lg"
         _text={{
@@ -29,7 +31,6 @@ export default function Physical(){
             Hike
           </Button>
         Lets get physical!
-      </Container>
-    </Center>
+      </Box>
   )
 }
