@@ -27,8 +27,11 @@ export default function Physical(){
           color: "white",
         }}
         >
-          <Button size={'sm'}>
-            Hike
+          <Button width={16}size={'sm'}>
+            Mike
+          </Button>
+          <Button width={28} size={'sm'}>
+            Jump Jacks
           </Button>
         Lets get physical!
       </Box>
