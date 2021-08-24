@@ -21,7 +21,7 @@ export default function Intake(){
           color: "white",
         }}
       >
-        The substances we intake make a difference!
+        <Center>The substances we intake make a difference!</Center>
       </Box>
   )
 }

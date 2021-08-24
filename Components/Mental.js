@@ -21,7 +21,7 @@ export default function Mental(){
             color: "white",
           }}
         >
-          The mind is a powerful Drug!
+          <Center>The mind is a powerful Drug!</Center>
         </Box>
   )
 }
