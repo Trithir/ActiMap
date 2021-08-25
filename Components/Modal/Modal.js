@@ -1,6 +1,7 @@
 import React from "react"
 import { Modal, Button, Input, Center, NativeBaseProvider } from "native-base"
 import HabitType from "./ButtonGroup"
+import Frequency from "./Frequency"
 
 export function HabitModal() {
   const [modalVisible, setModalVisible] = React.useState(false)
@@ -24,6 +25,7 @@ export function HabitModal() {
               ref={initialRef}
               placeholder="Name your habit"
             />
+            <Frequency />
             <Input
               mt={4}
               placeholder="Give yourself some notes"
