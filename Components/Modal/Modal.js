@@ -1,5 +1,6 @@
 import React from "react"
 import { Modal, Button, Input, Center, NativeBaseProvider } from "native-base"
+import HabitType from "./ButtonGroup"
 
 export function HabitModal() {
   const [modalVisible, setModalVisible] = React.useState(false)
@@ -17,7 +18,7 @@ export function HabitModal() {
           <Modal.CloseButton />
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
-            This is where habit type selector goes.
+            <HabitType />
             <Input
               mt={4}
               ref={initialRef}
@@ -30,6 +31,7 @@ export function HabitModal() {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
+              {/* save button to save all text fields and checks/creates ID */}
               <Button>SAVE</Button>
               <Button
                 onPress={() => {
