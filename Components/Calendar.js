@@ -2,13 +2,13 @@ import { Center, Container,Text, View, Box } from 'native-base';
 import React from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {Dimensions} from 'react-native';
+import { NewModal } from './NewModal';
 
 export default function Calen() {
     
-    const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-    const workout = {key: 'workout', color: 'green', selectedDotColor: 'blue'};
-    let deviceWidth = Dimensions.get('window').width
+    const physical = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
+    const mental = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
+    const intake = {key: 'workout', color: 'green', selectedDotColor: 'blue'};
     
     return (
         <Box style={{
@@ -31,9 +31,10 @@ export default function Calen() {
           // onDayLongPress={(day) => {console.log('selected day', day)}}
           markingType={'multi-dot'}
           markedDates={{ 
-            '2021-08-10': {dots: [massage, vacation, workout]},
-            '2021-08-08': {dots: [massage, vacation, workout]},
-            '2021-08-09': {dots: [massage, workout]}
+            '2021-08-10': {dots: [physical, mental, intake]},
+            '2021-08-08': {dots: [physical, mental, intake]},
+            '2021-08-09': {dots: [mental, intake]},
+            '2021-08-24': {dots: [physical, intake]}
           }}
           theme={{
             calendarBackground: '#601685',
