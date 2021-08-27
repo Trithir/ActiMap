@@ -26,9 +26,9 @@ export default function Calen() {
             
           }}
         >
-          <Calendar 
-          // onDayPress={(day) => {console.log('selected day', day)}}
-          // onDayLongPress={(day) => {console.log('selected day', day)}}
+          <CalendarList 
+          onDayPress={(day) => {console.log('selected day', day)}}
+          onDayLongPress={(day) => {console.log('selected day', day, 'long')}}
           markingType={'multi-dot'}
           markedDates={{ 
             '2021-08-10': {dots: [physical, mental, intake]},
@@ -36,6 +36,8 @@ export default function Calen() {
             '2021-08-09': {dots: [mental, intake]},
             '2021-08-24': {dots: [physical, intake]}
           }}
+          minDate={'2021-08-01'}
+          horizontal={true}
           theme={{
             calendarBackground: '#601685',
             todayTextColor: '#00adf5',
