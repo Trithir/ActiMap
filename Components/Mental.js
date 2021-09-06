@@ -1,6 +1,7 @@
-import { Center, Container, Box } from 'native-base';
+import { Center, Container, Box, Button } from 'native-base';
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {ScrollView} from 'react-native';
+import { HabitModal } from './Modal/Modal';
 
 export default function Mental(){
 
@@ -22,6 +23,9 @@ export default function Mental(){
           }}
         >
           <Center>The mind is a powerful Drug!</Center>
+          <ScrollView horizontal={true}>
+            <HabitModal />
+          </ScrollView>
         </Box>
   )
 }

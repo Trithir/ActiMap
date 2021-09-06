@@ -1,6 +1,7 @@
 import { Center, Container, Box } from 'native-base';
 import React from 'react';
-import {Dimensions, View, Text} from 'react-native';
+import {ScrollView, View, Text} from 'react-native';
+import { HabitModal } from './Modal/Modal';
 
 export default function Intake(){
 
@@ -22,6 +23,9 @@ export default function Intake(){
         }}
       >
         <Center>The substances we intake make a difference!</Center>
+        <ScrollView horizontal={true}>
+            <HabitModal />
+        </ScrollView>
       </Box>
   )
 }

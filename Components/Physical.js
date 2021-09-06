@@ -24,6 +24,10 @@ const getData = async () => {
   }
 }
 
+function IsPressed(){
+  //toggles variant outline(clicked) or solid(unclicked)
+}
+
 export default function Physical(){
 
   return (
@@ -51,12 +55,12 @@ export default function Physical(){
         Skip
       </Button>
       <Button  
-      onPress={() => {storeData('Completed'), console.log('press')}}
+      onPress={() => {storeData('Completed')}}
       delayLongPress={() => {getData()}}
       variant={"outline"}>
         Tennis
       </Button>
-      <Button >Walk Round</Button>
+      <Button variant="solid">Walk Round</Button>
       <Button >
         Skip
       </Button>

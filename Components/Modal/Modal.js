@@ -33,7 +33,7 @@ export function HabitModal() {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              {/* save button to save all text fields and checks/creates ID */}
+              {/* call CreateHabit() from DataFunctions.js */}
               <Button>SAVE</Button>
               <Button
                 onPress={() => {
@@ -52,7 +52,7 @@ export function HabitModal() {
           setModalVisible(!modalVisible)
         }}
       >
-        Open Modal
+        +
       </Button>
     </>
   )
