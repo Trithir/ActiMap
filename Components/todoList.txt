@@ -1,0 +1,9 @@
+WIP
+  DataFunctions - fill out functions
+  Modal - connecting to CreateHabit, modalVisible function
+  ButtonGroup - type setter function
+  Physical/Mental/Intake - Map over habits to render buttons
+  Calendar - Call ConvertCalendarData
+
+Future Features
+  Double tap to edit Habit
