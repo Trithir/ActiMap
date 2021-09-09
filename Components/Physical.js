@@ -1,7 +1,6 @@
 import { Center, Button, Box, Stack } from 'native-base';
 import * as React from 'react';
-import {Dimensions, View, Text, StyleSheet, ScrollView} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {ScrollView} from 'react-native';
 import { HabitModal } from './Modal/Modal';
 
 

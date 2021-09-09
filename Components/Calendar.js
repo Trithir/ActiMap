@@ -1,8 +1,6 @@
-import { Center, Container,Text, View, Box } from 'native-base';
+import { Box } from 'native-base';
 import React from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import {Dimensions} from 'react-native';
-import { NewModal } from './NewModal';
 import { ConvertCalendarData } from './DataFunctions';
 
 export default function Calen() {

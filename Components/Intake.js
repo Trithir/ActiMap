@@ -1,6 +1,6 @@
-import { Center, Container, Box } from 'native-base';
+import { Center, Box } from 'native-base';
 import React from 'react';
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView} from 'react-native';
 import { HabitModal } from './Modal/Modal';
 
 export default function Intake(){
