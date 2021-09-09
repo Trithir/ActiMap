@@ -2,27 +2,10 @@ import { Center, Button, Box, Stack } from 'native-base';
 import * as React from 'react';
 import {Dimensions, View, Text, StyleSheet, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HabitModal } from './Modal/Modal';
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('@storage_Key', value)
-  } catch (e) {
-    // saving error
-  }
-}
 
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@storage_Key')
-    if(value !== null) {
-      console.log(value)
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+//If list is all IsPressed, then mark dot
 
 function IsPressed(){
   //toggles variant outline(clicked) or solid(unclicked)

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import Calen from './Components/Calendar';
-import TodoForm from './Components/todoForm';
-import TodoList from './Components/todoList';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { useOrientation } from './Components/Orientation'; 
 import { Box, Center, NativeBaseProvider, Container } from "native-base"

@@ -3,12 +3,10 @@ import React from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {Dimensions} from 'react-native';
 import { NewModal } from './NewModal';
+import { ConvertCalendarData } from './DataFunctions';
 
 export default function Calen() {
     
-    const physical = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-    const mental = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-    const intake = {key: 'workout', color: 'green', selectedDotColor: 'blue'};
     
     return (
         <Box style={{
@@ -30,12 +28,10 @@ export default function Calen() {
           onDayPress={(day) => {console.log('selected day', day)}}
           onDayLongPress={(day) => {console.log('selected day', day, 'long')}}
           markingType={'multi-dot'}
-          markedDates={{ 
-            '2021-08-10': {dots: [physical, mental, intake]},
-            '2021-08-08': {dots: [physical, mental, intake]},
-            '2021-08-09': {dots: [mental, intake]},
-            '2021-08-24': {dots: [physical, intake]}
-          }}
+          markedDates={ 
+            ConvertCalendarData()
+            
+          }
           minDate={'2021-08-01'}
           horizontal={true}
           theme={{
