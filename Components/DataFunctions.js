@@ -1,9 +1,45 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const data = require('./fake.json')
+const writeDB = async () => {
+  try {
+    await AsyncStorage.setItem('DB', JSON.stringify(data))
+  } catch (e) {
+    // saving error
+  }
+}
+
+const readDB = async () => {
+  try {
+    const DB = await AsyncStorage.getItem('DB')
+    if(DB !== null) {
+      return JSON.parse(DB)
+    }
+    else return {"Habits":
+    {"0":
+      {"Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02"},
+    "1":
+      {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01"},
+    "2":
+      {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02"},
+    "3":
+      {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01"}
+    },
+      
+      "Completed Bits":{
+        "2021-09-03":{"IDS":[0,1]},
+        "2021-09-04":{"IDS":[0,2]},
+        "2021-09-06":{"IDS":[0,1,2]}
+      }
+  }
+  } catch(e) {
+    // error reading value
+  }
+}
+
+// const data = await readDB() //require('./fake.json')
 // const fs = require('fs');
 
-function GetHabit(id) {
+function GetHabit(id, data) {
   return (
     data.Habits[id]
   );
@@ -17,35 +53,6 @@ function GetCurrentDate(){
   return (cYear + "-" + cMonth + "-" + cDay)
 }
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('@storage_Key', value)
-  } catch (e) {
-    // saving error
-  }
-}
-
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@storage_Key')
-    if(value !== null) {
-      console.log(value)
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
-
-function WriteToDatabase() {
-  //use async storage
-  // fs.writeFile('./fake.json', JSON.stringify(data), err => {
-  //   if (err) {
-  //     console.error(err)
-  //     return
-  //   }
-  //   //file written successfully
-  // })
-}
 
 function ShowApplicableHabit(type) {
   //match habits to be displayed for type. 
@@ -87,11 +94,11 @@ function UndoHabitCompleted(date, id){
   //remove ID from completed date
 }
 
-function GetHabitDotsData(id) {
-  const P = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-  const M = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-  const I = {key: 'workout', color: 'green', selectedDotColor: 'blue'};
-  let type = GetHabit(id).Type
+function GetHabitDotsData(id, data) {
+  const P = {key: 'Physical', color: 'red', selectedDotColor: 'blue'};
+  const M = {key: 'Mental', color: 'blue', selectedDotColor: 'blue'};
+  const I = {key: 'Input', color: 'green', selectedDotColor: 'blue'};
+  let type = GetHabit(id, data).Type
   if (type == "M")
     return M
   if (type == "P")
@@ -100,7 +107,8 @@ function GetHabitDotsData(id) {
     return I
 }
 
-function ConvertCalendarData(){
+export async function ConvertCalendarData(){
+  let data = await readDB()
   //completed bits to calendar format
   // for each date, loop over each id to find habit type
   let ret = {}
@@ -108,7 +116,7 @@ function ConvertCalendarData(){
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
     let ids = data["Completed Bits"][date].IDS
-    let dots = {dots: ids.map((i) => GetHabitDotsData(i))}
+    let dots = {dots: ids.map((i) => GetHabitDotsData(i, data))}
     ret[date] = dots
   }
   return ret

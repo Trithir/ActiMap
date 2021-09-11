@@ -1,11 +1,16 @@
 import { Box } from 'native-base';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { ConvertCalendarData } from './DataFunctions';
 
 export default function Calen() {
-    
-    
+    const [calendarData, setcalendarData] = useState({})
+    useEffect(() => {
+      ConvertCalendarData()
+      .then(data =>
+        setcalendarData(data)
+      );
+     }, [])
     return (
         <Box style={{
           linearGradient: {
@@ -26,10 +31,7 @@ export default function Calen() {
           onDayPress={(day) => {console.log('selected day', day)}}
           onDayLongPress={(day) => {console.log('selected day', day, 'long')}}
           markingType={'multi-dot'}
-          markedDates={ 
-            ConvertCalendarData()
-            
-          }
+          markedDates={ calendarData }
           minDate={'2021-08-01'}
           horizontal={true}
           theme={{
