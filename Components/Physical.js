@@ -1,6 +1,7 @@
 import { Center, Button, Box, Stack } from 'native-base';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
+import { GetPhysicalHabits } from './DataFunctions';
 import { HabitModal } from './Modal/Modal';
 
 
@@ -11,7 +12,13 @@ function IsPressed(){
 }
 
 export default function Physical(){
-
+  const [physicalHabits, setphysicalHabits] = useState([])
+    useEffect(() => {
+      GetPhysicalHabits()
+        .then(data =>
+        setphysicalHabits(data)
+      );
+     }, [])
   return (
     <Box 
       bg={{
@@ -32,23 +39,8 @@ export default function Physical(){
     >
       <Center>Lets get physical!</Center>
       <ScrollView horizontal={true}>
-      <HabitModal/>
-      <Button >
-        Skip
-      </Button>
-      <Button  
-      onPress={() => {storeData('Completed')}}
-      delayLongPress={() => {getData()}}
-      variant={"outline"}>
-        Tennis
-      </Button>
-      <Button variant="solid">Walk Round</Button>
-      <Button >
-        Skip
-      </Button>
-      <Button  variant="outline">
-        Tennis
-      </Button>
+        <HabitModal/>
+        {physicalHabits.map(habit => <Button key={habit.ID}>{habit.Name}</Button>)} 
       </ScrollView>
     </Box>
   )

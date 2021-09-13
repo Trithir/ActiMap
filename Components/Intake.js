@@ -1,9 +1,17 @@
-import { Center, Box } from 'native-base';
-import React from 'react';
+import { Center, Box, Button } from 'native-base';
+import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
+import { GetIntakeHabits } from './DataFunctions';
 import { HabitModal } from './Modal/Modal';
 
 export default function Intake(){
+  const [intakeHabits, setintakeHabits] = useState([])
+    useEffect(() => {
+      GetIntakeHabits()
+        .then(data =>
+        setintakeHabits(data)
+      );
+     }, [])
 
   return (
       <Box 
@@ -25,6 +33,7 @@ export default function Intake(){
         <Center>The substances we intake make a difference!</Center>
         <ScrollView horizontal={true}>
             <HabitModal />
+            {intakeHabits.map(habit => <Button key={habit.ID}>{habit.Name}</Button>)}
         </ScrollView>
       </Box>
   )

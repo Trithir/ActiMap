@@ -16,59 +16,64 @@ const readDB = async () => {
     }
     else return {"Habits":
     {"0":
-      {"Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02"},
+    {"Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"},
     "1":
-      {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01"},
+    {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"1"},
     "2":
-      {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02"},
+    {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"2"},
     "3":
-      {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01"}
-    },
-      
-      "Completed Bits":{
-        "2021-09-03":{"IDS":[0,1]},
-        "2021-09-04":{"IDS":[0,2]},
-        "2021-09-06":{"IDS":[0,1,2]}
-      }
-  }
-  } catch(e) {
-    // error reading value
+    {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"3"}
+  },
+  
+  "Completed Bits":{
+    "2021-09-03":{"IDS":[0,1]},
+    "2021-09-04":{"IDS":[0,2]},
+    "2021-09-06":{"IDS":[0,1,2]}
   }
 }
-
-// const data = await readDB() //require('./fake.json')
-// const fs = require('fs');
+} catch(e) {
+  // error reading value
+}
+}
 
 function GetHabit(id, data) {
   return (
     data.Habits[id]
-  );
-}
-
-function GetCurrentDate(){
-  let currentDate = new Date();
-  let cDay = currentDate.getDate().toString().padStart(2, "0")
-  let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
-  let cYear = currentDate.getFullYear().toString()
-  return (cYear + "-" + cMonth + "-" + cDay)
-}
-
-
-function ShowApplicableHabit(type) {
-  //match habits to be displayed for type. 
-  //Called in Physical/Mental/Intake to set buttons
-}
-
-function CreateHabit(habit) {
-  let creationDate = GetCurrentDate()
-  //set id.....Habits.length + 1
+    );
+  }
+  
+  function GetCurrentDate(){
+    let currentDate = new Date();
+    let cDay = currentDate.getDate().toString().padStart(2, "0")
+    let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
+    let cYear = currentDate.getFullYear().toString()
+    return (cYear + "-" + cMonth + "-" + cDay)
+  }
+  
+  export async function GetPhysicalHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "P")
+  }
+  
+  export async function GetMentalHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "M")
+  }
+  
+  export async function GetIntakeHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "I")
+  }
+  function CreateHabit(habit) {
+    let creationDate = GetCurrentDate()
+    //set id.....Habits.length + 1
     //<HabitModal /> data
     //set Deleted: false
     //set Creation_Date
     //WriteToDatabase()
-}
-
-function CheckIfTodayHabit(id) {
+  }
+  
+  function CheckIfTodayHabit(id) {
   let currentDate = GetCurrentDate()
   //Use start date, frequency, current date to determine
 }
@@ -128,5 +133,5 @@ export async function ConvertCalendarData(){
 // habit.Frequency = 3
 // console.log(GetHabit(1))
 // WriteToDatabase()
-GetCurrentDate()
+// GetCurrentDate()
 // module.exports = {GetHabit}
