@@ -1,12 +1,23 @@
 import React from "react"
-import { Modal, Button, Input, Center, NativeBaseProvider } from "native-base"
+import { Modal, Button, Input, Center, NativeBaseProvider, Text } from "native-base"
 import HabitType from "./ButtonGroup"
-import Frequency from "./Frequency"
+import {Frequency} from "./Frequency"
+import TextInput from "react-native"
 
-export function HabitModal() {
+export function HabitModal(props) {
   const [modalVisible, setModalVisible] = React.useState(false)
+  const [habitName, sethabitName] = React.useState('')
+  const [habitNote, sethabitNote] = React.useState('')
+  const [habitFrequency, sethabitFrequency] = React.useState('')
+  const [habitType, sethabitType] = React.useState('')
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const habitNameChange = (text) => {
+    sethabitName(text) 
+  }
+  const habitNoteChange = (text) => {
+    sethabitNote(text) 
+  }
   return (
     <>
       <Modal
@@ -19,16 +30,21 @@ export function HabitModal() {
           <Modal.CloseButton />
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
-            <HabitType />
+            <HabitType sethabitType={sethabitType}/>
+            <Button onPress={() => console.log(habitType, habitName, habitFrequency, habitNote)}>Data?</Button>
             <Input
               mt={4}
+              value={habitName}
               ref={initialRef}
               placeholder="Name your habit"
+              onChangeText={habitNameChange}
             />
-            <Frequency />
+            <Frequency sethabitFrequency={sethabitFrequency} />
             <Input
               mt={4}
+              value={habitNote}
               placeholder="Give yourself some notes"
+              onChangeText={habitNoteChange}
             />
           </Modal.Body>
           <Modal.Footer>
