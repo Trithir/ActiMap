@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import {FormControl, Select, HStack, Text, Container, CheckIcon, Center, NativeBaseProvider} from "native-base"
 
 export const Frequency = (props) => {
@@ -24,16 +24,12 @@ export const Frequency = (props) => {
               }}
               mt={1}
             >
-              <Select.Item label="Daily" value="Every 1 days" />
+              <Select.Item label="Daily" value="Every day" />
               <Select.Item label="Skip a day" value="Every 2 days" />
               <Select.Item label="Weekdays" value="Mon-Fri" />
               <Select.Item label="Weekends" value="Sat/Sun" />
               <Select.Item label="Custom" value="Enter number" />
             </Select></Center>
-            {/* <FormControl.HelperText mt={1}>
-              We'll keep this between us.
-            </FormControl.HelperText> */}
-            {/* <FormControl.ErrorMessage>Something is wrong.</FormControl.ErrorMessage> */}
           </FormControl>
 
           <HStack mt={3} alignItems="baseline">
@@ -47,13 +43,3 @@ export const Frequency = (props) => {
     </NativeBaseProvider>
   )
 }
-
-// export default () => {
-//   return (
-//     <NativeBaseProvider>
-//       <Center flex={1}>
-//         <Frequency />
-//       </Center>
-//     </NativeBaseProvider>
-//   )
-// }

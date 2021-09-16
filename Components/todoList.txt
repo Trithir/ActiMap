@@ -1,9 +1,15 @@
 WIP
   DataFunctions - fill out functions
   Modal - connecting to CreateHabit, modalVisible function
+  Habit buttons on/off functionality
+  + button on habit home should automatically set modal to that habit type
+  Calendar day only show one dot of each type
+
+Maybe!
+  All habits completed shows dot (vs any amount completed)
 
 Future Features
-  Double tap to edit Habit
+  Double tap to edit Habit (currently will be loooooooongpress)
 
 Done?
   ButtonGroup - type setter function

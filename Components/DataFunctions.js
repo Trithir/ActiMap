@@ -1,13 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const writeDB = async () => {
-  try {
-    await AsyncStorage.setItem('DB', JSON.stringify(data))
-  } catch (e) {
-    // saving error
-  }
-}
-
 const readDB = async () => {
   try {
     const DB = await AsyncStorage.getItem('DB')
@@ -15,25 +7,39 @@ const readDB = async () => {
       return JSON.parse(DB)
     }
     else return {"Habits":
-    {"0":
-    {"Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"},
-    "1":
-    {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"1"},
+    {"1":
+    {"Name":"Jogger","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
     "2":
-    {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"2"},
+    {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
     "3":
-    {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"3"}
+    {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
+    "4":
+    {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
   },
   
   "Completed Bits":{
-    "2021-09-03":{"IDS":[0,1]},
-    "2021-09-04":{"IDS":[0,2]},
-    "2021-09-06":{"IDS":[0,1,2]}
+    "2021-09-03":{"IDS":[1,2]},
+    "2021-09-04":{"IDS":[2,3]},
+    "2021-09-06":{"IDS":[1,2,3]},
+    "2021-09-15":{"IDS":[2,3]}
+  }
+  }
+  } catch(e) {
+    // error reading value
   }
 }
-} catch(e) {
-  // error reading value
-}
+
+function ClearDB(){
+  //Delete all DB data
+  // {
+  //   "Habits":{
+
+  //   },
+  
+  //   "Completed Bits":{
+      
+  //   }
+  // }
 }
 
 function GetHabit(id, data) {
@@ -42,38 +48,46 @@ function GetHabit(id, data) {
     );
   }
   
-  function GetCurrentDate(){
-    let currentDate = new Date();
-    let cDay = currentDate.getDate().toString().padStart(2, "0")
-    let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
-    let cYear = currentDate.getFullYear().toString()
-    return (cYear + "-" + cMonth + "-" + cDay)
+function GetCurrentDate(){
+  let currentDate = new Date();
+  let cDay = currentDate.getDate().toString().padStart(2, "0")
+  let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
+  let cYear = currentDate.getFullYear().toString()
+  return (cYear + "-" + cMonth + "-" + cDay)
+}
+
+export async function GetPhysicalHabits() {
+  let data = await readDB()
+  return Object.values(data.Habits).filter((H) => H.Type == "P")
+}
+export async function GetMentalHabits() {
+  let data = await readDB()
+  return Object.values(data.Habits).filter((H) => H.Type == "M")
+}
+export async function GetIntakeHabits() {
+  let data = await readDB()
+  return Object.values(data.Habits).filter((H) => H.Type == "I")
+}
+
+const writeDB = async (data) => {
+  try {
+    await AsyncStorage.setItem('DB', JSON.stringify(data))
+  } catch (e) {
+    // saving error
   }
-  
-  export async function GetPhysicalHabits() {
-    let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "P")
-  }
-  
-  export async function GetMentalHabits() {
-    let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "M")
-  }
-  
-  export async function GetIntakeHabits() {
-    let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "I")
-  }
-  function CreateHabit(habit) {
-    let creationDate = GetCurrentDate()
-    //set id.....Habits.length + 1
-    //<HabitModal /> data
-    //set Deleted: false
-    //set Creation_Date
-    //WriteToDatabase()
-  }
-  
-  function CheckIfTodayHabit(id) {
+}
+
+// "Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
+export async function CreateHabit(habit) {
+  let data = await readDB()
+  habit.Creation_Date = GetCurrentDate()
+  habit.Deleted = false
+  habit.ID = data.Habits.length + 1
+  data.Habits[habit.ID]=habit
+  await writeDB(data)
+}
+
+function CheckIfTodayHabit(id) {
   let currentDate = GetCurrentDate()
   //Use start date, frequency, current date to determine
 }
@@ -84,7 +98,8 @@ function GetDailyHabits() {
   //List of all Habits available that day based on Frequency
 }
 
-function MarkHabitCompleted(date, id){
+export async function MarkHabitCompleted(date, id){
+  let data = await readDB()
   let currentDate = GetCurrentDate()
   //add to completed array
   //get current date
@@ -99,6 +114,7 @@ function UndoHabitCompleted(date, id){
   //remove ID from completed date
 }
 
+// "Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
 function GetHabitDotsData(id, data) {
   const P = {key: 'Physical', color: 'red', selectedDotColor: 'blue'};
   const M = {key: 'Mental', color: 'blue', selectedDotColor: 'blue'};
@@ -122,6 +138,15 @@ export async function ConvertCalendarData(){
     let date = dates[i]
     let ids = data["Completed Bits"][date].IDS
     let dots = {dots: ids.map((i) => GetHabitDotsData(i, data))}
+    let showDots = {dots:[]}
+    for(let i=0; i<dots.length;i++) {
+      //Look up how to loop over objects in JS
+      //compare current key to keys in showDots
+      //if current key != any key in showDots, add to showDots
+      //if current key == any key in showDots, ignore it 
+      //if showDots.length = 3 or have looked through all the dots, return
+      //
+    }
     ret[date] = dots
   }
   return ret

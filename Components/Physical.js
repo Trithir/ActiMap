@@ -1,4 +1,4 @@
-import { Center, Button, Box, Stack } from 'native-base';
+import { Center, Button, Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
 import { GetPhysicalHabits } from './DataFunctions';

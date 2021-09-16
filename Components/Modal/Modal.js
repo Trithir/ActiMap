@@ -1,8 +1,8 @@
 import React from "react"
-import { Modal, Button, Input, Center, NativeBaseProvider, Text } from "native-base"
+import { Modal, Button, Input } from "native-base"
 import HabitType from "./ButtonGroup"
 import {Frequency} from "./Frequency"
-import TextInput from "react-native"
+import { CreateHabit } from "../DataFunctions"
 
 export function HabitModal(props) {
   const [modalVisible, setModalVisible] = React.useState(false)
@@ -49,16 +49,10 @@ export function HabitModal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              {/* call CreateHabit() from DataFunctions.js */}
-              <Button>SAVE</Button>
-              <Button
-                onPress={() => {
-                  setModalVisible(!modalVisible)
-                }}
-                colorScheme="secondary"
-              >
-                CLOSE
-              </Button>
+              <Button onPress={async () => {
+                await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote})
+                setModalVisible(!modalVisible)
+                }}>SAVE</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>
@@ -71,15 +65,5 @@ export function HabitModal(props) {
         +
       </Button>
     </>
-  )
-}
-
-export default () => {
-  return (
-    <NativeBaseProvider>
-      <Center flex={1}>
-        <Example />
-      </Center>
-    </NativeBaseProvider>
   )
 }
