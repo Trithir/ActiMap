@@ -36,7 +36,7 @@ export default function Calen() {
       horizontal={true}
       enableSwipeMonths={true}
       theme={{
-        calendarBackground: '#601685',
+        calendarBackground: '#ce2fff',
         todayTextColor: '#FF5310',
         indicatorColor: 'blue',
       }}

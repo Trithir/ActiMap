@@ -8,6 +8,7 @@ import Physical from './Components/Physical';
 import Mental from './Components/Mental';
 import Intake from './Components/Intake';
 import TopBar from './Components/TopBar';
+import CalendarFiller from './Components/CalendarFiller';
 
 export default function App() {
   const config = {
@@ -37,7 +38,9 @@ export default function App() {
           <Row size={33}><Intake/></Row>
         </Col>
         <Col>
-          <Row size={50}><Calen/></Row>
+          <Row size={6}><CalendarFiller /></Row>
+          <Row size={80}><Calen/></Row>
+          <Row size={10}><CalendarFiller /></Row>
         </Col>
       </Grid>
     </NativeBaseProvider>

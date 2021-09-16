@@ -2,7 +2,7 @@ import React from "react"
 import { Modal, Button, Input } from "native-base"
 import HabitType from "./ButtonGroup"
 import {Frequency} from "./Frequency"
-import { CreateHabit } from "../DataFunctions"
+import { CreateHabit, ResetDB } from "../DataFunctions"
 
 export function HabitModal(props) {
   const [modalVisible, setModalVisible] = React.useState(false)
@@ -53,6 +53,10 @@ export function HabitModal(props) {
                 await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote})
                 setModalVisible(!modalVisible)
                 }}>SAVE</Button>
+              <Button onPress={async () => {
+                await ResetDB()
+                setModalVisible(!modalVisible)
+              }}>ClearDB</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>

@@ -1,9 +1,20 @@
+Colors: 
+  P peach: #ff7160
+  M teal: #4bfffb
+  I lellow: #c8ff13
+  purps: #ce2fff
+
 WIP
   DataFunctions - fill out functions
   Modal - connecting to CreateHabit, modalVisible function
-  Habit buttons on/off functionality
+  Habit buttons on/off (isCompleted) functionality
   + button on habit home should automatically set modal to that habit type
   Calendar day only show one dot of each type
+  Frequency - Set up Mon-Sun buttons to toggle
+  Create edit habit functionality
+  TH icon (with 3 dots?....gradient over letters)
+  rename app.json expo - Name and Slug
+  
 
 Maybe!
   All habits completed shows dot (vs any amount completed)

@@ -23,7 +23,7 @@ export default function Physical(){
     <Box 
       bg={{
         linearGradient: {
-          colors: ["teal.400", "violet.800"],
+          colors: ["#ff7160", "#ce2fff"],
           start: [0, 0],
           end: [1, 0],
         },

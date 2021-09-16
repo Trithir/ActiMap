@@ -29,15 +29,32 @@ const readDB = async () => {
   }
 }
 
-function ClearDB(){
+export async function ResetDB(){
+  let data = {"Habits":
+  {"1":
+  {"Name":"Jogger","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
+  "2":
+  {"Name":"Meditate","Type":"M","Frequency":3,"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
+  "3":
+  {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
+  "4":
+  {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
+},
+
+"Completed Bits":{
+  "2021-09-03":{"IDS":[1,2]},
+  "2021-09-04":{"IDS":[2,3]},
+  "2021-09-06":{"IDS":[1,2,3]},
+  "2021-09-15":{"IDS":[2,3]}
+}
+}
+  await writeDB(data)
   //Delete all DB data
   // {
   //   "Habits":{
-
   //   },
   
   //   "Completed Bits":{
-      
   //   }
   // }
 }
@@ -116,9 +133,9 @@ function UndoHabitCompleted(date, id){
 
 // "Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
 function GetHabitDotsData(id, data) {
-  const P = {key: 'Physical', color: 'red', selectedDotColor: 'blue'};
-  const M = {key: 'Mental', color: 'blue', selectedDotColor: 'blue'};
-  const I = {key: 'Input', color: 'green', selectedDotColor: 'blue'};
+  const P = {key: 'Physical', color: '#ff7160'};
+  const M = {key: 'Mental', color: '#4bfffb'};
+  const I = {key: 'Input', color: '#c8ff13'};
   let type = GetHabit(id, data).Type
   if (type == "M")
     return M

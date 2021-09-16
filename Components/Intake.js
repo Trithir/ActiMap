@@ -17,7 +17,7 @@ export default function Intake(){
     <Box 
       bg={{
         linearGradient: {
-          colors: ["green.400", "violet.800"],
+          colors: ["#c8ff13", "#ce2fff"],
           start: [0, 0],
           end: [1, 0],
       },

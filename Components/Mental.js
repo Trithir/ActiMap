@@ -16,7 +16,7 @@ export default function Mental(){
   return (
     <Box bg={{
       linearGradient: {
-        colors: ["yellow.400", "violet.800"],
+        colors: ["#4bfffb", "#ce2fff"],
         start: [0, 0],
         end: [1, 0],
       },
