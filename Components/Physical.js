@@ -5,21 +5,16 @@ import { GetPhysicalHabits } from './DataFunctions';
 import HabitButton from './HabitButton';
 import { HabitModal } from './Modal/Modal';
 
-
-//If list is all IsPressed, then mark dot
-
-function IsPressed(){
-  //toggles variant outline(clicked) or solid(unclicked)
-}
-
-export default function Physical(){
+export default function Physical(props){
+  const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [physicalHabits, setphysicalHabits] = useState([])
     useEffect(() => {
       GetPhysicalHabits()
         .then(data =>
         setphysicalHabits(data)
       );
-    }, [])
+    }, [refreshToken])
+  
   return (
     <Box 
       bg={{
@@ -40,7 +35,7 @@ export default function Physical(){
     >
       <Center>Lets get physical!</Center>
       <ScrollView horizontal={true}>
-        <HabitModal/>
+        <HabitModal setrefreshToken={setrefreshToken}/>
         {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)} 
       </ScrollView>
     </Box>

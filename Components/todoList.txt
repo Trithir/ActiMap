@@ -1,4 +1,7 @@
-Dots clear when the last selection is second habit in a category.
+Bugs:
+
+Commit Message:
+  Type Buttons
 
 Colors: 
   P peach: #ff7160
@@ -7,12 +10,9 @@ Colors:
   purps: #ce2fff
 
 WIP
+  Set so can't save without Habit: Type, Name, Frequency. (Note not required?)
   DataFunctions - fill out functions
-  Modal - connecting to CreateHabit, modalVisible function
-  Habit buttons on/off (isCompleted) functionality
-  Move habit button function to DataFunctions
   + button on habit home should automatically set modal to that habit type
-  Calendar day only show one dot of each type
   Frequency - Set up Mon-Sun buttons to toggle
   Create edit habit functionality
   TH icon (with 3 dots?....gradient over letters)
@@ -26,6 +26,13 @@ Future Features
   Double tap to edit Habit (currently will be loooooooongpress)
 
 Done?
+  Reactify Newly added Habit
+  Modal - connecting to CreateHabit, modalVisible function
+  Calendar day only show one dot of each type
   ButtonGroup - type setter function
+  Habit buttons on/off (isCompleted) functionality
   Physical/Mental/Intake - Map over habits to render buttons
+  Move habit button function to DataFunctions
+  Dots clear when the last selection is second habit in a category.
+  Only keeping most recently added Habit. (habit.ID shows NaN)
   Calendar - Call ConvertCalendarData

@@ -5,14 +5,15 @@ import { GetMentalHabits } from './DataFunctions';
 import { HabitModal } from './Modal/Modal';
 import HabitButton from './HabitButton';
 
-export default function Mental(){
+export default function Mental(props){
+  const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [mentalHabits, setmentalHabits] = useState([])
     useEffect(() => {
       GetMentalHabits()
         .then(data =>
         setmentalHabits(data)
       );
-     }, [])
+     }, [refreshToken])
 
   return (
     <Box bg={{
@@ -33,7 +34,7 @@ export default function Mental(){
     >
       <Center>The mind is a powerful Drug!</Center>
       <ScrollView horizontal={true}>
-        <HabitModal />
+        <HabitModal setrefreshToken={setrefreshToken}/>
         {mentalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)}
       </ScrollView>
     </Box>

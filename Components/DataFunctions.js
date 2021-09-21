@@ -87,19 +87,20 @@ const writeDB = async (data) => {
 }
 
 // "Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
-export async function CreateHabit(habit) {
+export async function CreateHabit(habit, cb) {
   let data = await readDB()
   habit.Creation_Date = GetCurrentDate()
   habit.Deleted = false
-  habit.ID = data.Habits.length + 1
+  habit.ID = Object.keys(data["Habits"]).length + 1
   data.Habits[habit.ID]=habit
   await writeDB(data)
+  cb(Math.random())
 }
 
 export async function MarkHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
-  //if Completed_Bits contains currentDate, push id, else push current date and id.
+
   if(!data.Completed_Bits){
     data.Completed_Bits = {}
   }
@@ -162,7 +163,7 @@ export async function ConvertCalendarData(cb){
     let keys = []
     for(let i=0; i<dots.length;i++) {
       if(showDots.length == 3) {
-        return 
+        break; 
       }
       if(!keys.includes(dots[i].key)) { //if keys does not have current key, add current key to keys and showDots
         keys.push(dots[i].key)

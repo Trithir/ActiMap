@@ -5,14 +5,15 @@ import { GetIntakeHabits } from './DataFunctions';
 import { HabitModal } from './Modal/Modal';
 import HabitButton from './HabitButton';
 
-export default function Intake(){
+export default function Intake(props){
+  const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [intakeHabits, setintakeHabits] = useState([])
     useEffect(() => {
       GetIntakeHabits()
         .then(data =>
         setintakeHabits(data)
       );
-     }, [])
+    }, [refreshToken])
 
   return (
     <Box 
@@ -21,7 +22,7 @@ export default function Intake(){
           colors: ["#c8ff13", "#ce2fff"],
           start: [0, 0],
           end: [1, 0],
-      },
+        },
       }}
       width="100%"
       height="100%"
@@ -33,7 +34,7 @@ export default function Intake(){
     >
       <Center>The substances we intake make a difference!</Center>
       <ScrollView horizontal={true}>
-        <HabitModal />
+        <HabitModal setrefreshToken={setrefreshToken}/>
         {intakeHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)}
       </ScrollView>
     </Box>
