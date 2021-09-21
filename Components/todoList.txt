@@ -1,3 +1,5 @@
+Dots clear when the last selection is second habit in a category.
+
 Colors: 
   P peach: #ff7160
   M teal: #4bfffb
@@ -8,6 +10,7 @@ WIP
   DataFunctions - fill out functions
   Modal - connecting to CreateHabit, modalVisible function
   Habit buttons on/off (isCompleted) functionality
+  Move habit button function to DataFunctions
   + button on habit home should automatically set modal to that habit type
   Calendar day only show one dot of each type
   Frequency - Set up Mon-Sun buttons to toggle

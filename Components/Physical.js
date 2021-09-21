@@ -1,7 +1,8 @@
-import { Center, Button, Box } from 'native-base';
+import { Center, Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
 import { GetPhysicalHabits } from './DataFunctions';
+import HabitButton from './HabitButton';
 import { HabitModal } from './Modal/Modal';
 
 
@@ -18,7 +19,7 @@ export default function Physical(){
         .then(data =>
         setphysicalHabits(data)
       );
-     }, [])
+    }, [])
   return (
     <Box 
       bg={{
@@ -40,7 +41,7 @@ export default function Physical(){
       <Center>Lets get physical!</Center>
       <ScrollView horizontal={true}>
         <HabitModal/>
-        {physicalHabits.map(habit => <Button key={habit.ID}>{habit.Name}</Button>)} 
+        {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)} 
       </ScrollView>
     </Box>
   )

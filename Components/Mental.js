@@ -1,8 +1,9 @@
-import { Center, Box, Button } from 'native-base';
+import { Center, Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
 import { GetMentalHabits } from './DataFunctions';
 import { HabitModal } from './Modal/Modal';
+import HabitButton from './HabitButton';
 
 export default function Mental(){
   const [mentalHabits, setmentalHabits] = useState([])
@@ -33,7 +34,7 @@ export default function Mental(){
       <Center>The mind is a powerful Drug!</Center>
       <ScrollView horizontal={true}>
         <HabitModal />
-        {mentalHabits.map(habit => <Button key={habit.ID}>{habit.Name}</Button>)}
+        {mentalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)}
       </ScrollView>
     </Box>
   )

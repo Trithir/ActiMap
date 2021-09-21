@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { ConvertCalendarData } from './DataFunctions';
 
-export default function Calen() {
+export default function Calen(props) {
   const [calendarData, setcalendarData] = useState({})
+  const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   useEffect(() => {
-    ConvertCalendarData()
+    ConvertCalendarData(setrefreshToken)
     .then(data =>
       setcalendarData(data)
     );
-  }, [])
+  }, [refreshToken])
+
   return (
     <Box 
       style={{
@@ -21,11 +23,12 @@ export default function Calen() {
         },
       }}
       width="100%"
+      height='100%'
       rounded="lg"
-      _text={{
-        fontSize: "md",
-        fontWeight: "bold",
-      }}
+      // _text={{
+      //   fontSize: "md",
+      //   fontWeight: "bold",
+      // }}
     >
       <Calendar
       onDayPress={(day) => {console.log('selected day', day)}}

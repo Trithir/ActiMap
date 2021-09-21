@@ -17,7 +17,7 @@ const readDB = async () => {
     {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
   },
   
-  "Completed Bits":{
+  "Completed_Bits":{
     "2021-09-03":{"IDS":[1,2]},
     "2021-09-04":{"IDS":[2,3]},
     "2021-09-06":{"IDS":[1,2,3]},
@@ -39,31 +39,23 @@ export async function ResetDB(){
   {"Name":"Greens","Type":"I","Frequency":1,"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
   "4":
   {"Name":"Read","Type":"M","Frequency":2,"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
-},
+  },
 
-"Completed Bits":{
-  "2021-09-03":{"IDS":[1,2]},
-  "2021-09-04":{"IDS":[2,3]},
-  "2021-09-06":{"IDS":[1,2,3]},
-  "2021-09-15":{"IDS":[2,3]}
-}
+  "Completed_Bits":{
+    "2021-09-03":{"IDS":[1,2]},
+    "2021-09-04":{"IDS":[2,3]},
+    "2021-09-06":{"IDS":[1,2,3]},
+    "2021-09-15":{"IDS":[2,3]}
+  }
 }
   await writeDB(data)
-  //Delete all DB data
-  // {
-  //   "Habits":{
-  //   },
-  
-  //   "Completed Bits":{
-  //   }
-  // }
 }
 
 function GetHabit(id, data) {
   return (
     data.Habits[id]
     );
-  }
+}
   
 function GetCurrentDate(){
   let currentDate = new Date();
@@ -104,26 +96,37 @@ export async function CreateHabit(habit) {
   await writeDB(data)
 }
 
-function CheckIfTodayHabit(id) {
+export async function MarkHabitCompleted(id, cb){
+  let data = await readDB()
   let currentDate = GetCurrentDate()
-  //Use start date, frequency, current date to determine
+  //if Completed_Bits contains currentDate, push id, else push current date and id.
+  if(!data.Completed_Bits){
+    data.Completed_Bits = {}
+  }
+
+  if(data.Completed_Bits[currentDate]) {
+    data.Completed_Bits[currentDate].IDS.push(id)
+  }
+  else {
+    data.Completed_Bits[currentDate] = {"IDS": [id]}
+  }
+  await writeDB(data)
+  cb(Math.random())
+}
+
+export async function IsCompletedYet(id) {
+  let data = await readDB()
+  let currentDate = GetCurrentDate()
+  if(data.Completed_Bits[currentDate]){
+    let ids = data["Completed_Bits"][currentDate].IDS
+    return ids.includes(id)
+  } return false
 }
 
 function GetDailyHabits() {
   //Get current date
   let currentDate = GetCurrentDate()
   //List of all Habits available that day based on Frequency
-}
-
-export async function MarkHabitCompleted(date, id){
-  let data = await readDB()
-  let currentDate = GetCurrentDate()
-  //add to completed array
-  //get current date
-  //get id of completed habit
-  // "Completed Bits":{
-  //   "2021-09-04":{"IDS":0},
-  //   "2021-09-03":{"IDS":[0,1]}}}
 }
 
 function UndoHabitCompleted(date, id){
@@ -145,27 +148,30 @@ function GetHabitDotsData(id, data) {
     return I
 }
 
-export async function ConvertCalendarData(){
+export async function ConvertCalendarData(cb){
   let data = await readDB()
   //completed bits to calendar format
   // for each date, loop over each id to find habit type
   let ret = {}
-  let dates = Object.keys(data["Completed Bits"])
+  let dates = Object.keys(data["Completed_Bits"])
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
-    let ids = data["Completed Bits"][date].IDS
-    let dots = {dots: ids.map((i) => GetHabitDotsData(i, data))}
-    let showDots = {dots:[]}
+    let ids = data["Completed_Bits"][date].IDS
+    let dots = ids.map((i) => GetHabitDotsData(i, data))
+    let showDots = []
+    let keys = []
     for(let i=0; i<dots.length;i++) {
-      //Look up how to loop over objects in JS
-      //compare current key to keys in showDots
-      //if current key != any key in showDots, add to showDots
-      //if current key == any key in showDots, ignore it 
-      //if showDots.length = 3 or have looked through all the dots, return
-      //
+      if(showDots.length == 3) {
+        return 
+      }
+      if(!keys.includes(dots[i].key)) { //if keys does not have current key, add current key to keys and showDots
+        keys.push(dots[i].key)
+        showDots.push(dots[i])
+      }
     }
-    ret[date] = dots
+    ret[date] = {'dots': showDots}
   }
+  cb(Math.random())
   return ret
 }
 
