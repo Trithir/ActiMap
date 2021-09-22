@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
 import { GetPhysicalHabits } from './DataFunctions';
 import HabitButton from './HabitButton';
-import { HabitModal } from './Modal/Modal';
+import { NewModalButton } from './Modal/NewModal';
 
 export default function Physical(props){
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
@@ -35,8 +35,8 @@ export default function Physical(props){
     >
       <Center>Lets get physical!</Center>
       <ScrollView horizontal={true}>
-        <HabitModal setrefreshToken={setrefreshToken}/>
-        {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)} 
+        <NewModalButton setrefreshToken={setrefreshToken}/>
+        {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Frequency={habit.Frequency} Note={habit.Note}/>)} 
       </ScrollView>
     </Box>
   )

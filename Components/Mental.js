@@ -2,8 +2,9 @@ import { Center, Box } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
 import { GetMentalHabits } from './DataFunctions';
-import { HabitModal } from './Modal/Modal';
 import HabitButton from './HabitButton';
+import { NewModalButton } from './Modal/NewModal';
+
 
 export default function Mental(props){
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
@@ -34,7 +35,7 @@ export default function Mental(props){
     >
       <Center>The mind is a powerful Drug!</Center>
       <ScrollView horizontal={true}>
-        <HabitModal setrefreshToken={setrefreshToken}/>
+        <NewModalButton setrefreshToken={setrefreshToken}/>
         {mentalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name}/>)}
       </ScrollView>
     </Box>

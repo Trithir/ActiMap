@@ -5,11 +5,11 @@ import {Frequency} from "./Frequency"
 import { CreateHabit, ResetDB } from "../DataFunctions"
 
 export function HabitModal(props) {
-  const [modalVisible, setModalVisible] = useState(false)
-  const [habitName, sethabitName] = useState('')
-  const [habitNote, sethabitNote] = useState('')
-  const [habitFrequency, sethabitFrequency] = useState('')
-  const [habitType, sethabitType] = useState('')
+  // const [modalVisible, setModalVisible] = useState(props.modalVisible)
+  const [habitName, sethabitName] = useState(props.Name)
+  const [habitNote, sethabitNote] = useState(props.Note)
+  const [habitFrequency, sethabitFrequency] = useState(props.Frequency)
+  const [habitType, sethabitType] = useState(props.Type)
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
@@ -28,8 +28,8 @@ export function HabitModal(props) {
   return (
     <>
       <Modal
-        isOpen={modalVisible}
-        onClose={setModalVisible}
+        isOpen={props.modalVisible}
+        onClose={props.setModalVisible}
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
       >
@@ -57,25 +57,18 @@ export function HabitModal(props) {
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               <Button onPress={async () => {
+                // if ID exists, edit, else CreateHabit
                 await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote}, props.setrefreshToken)
-                setModalVisible(!modalVisible)
+                props.setModalVisible(!props.modalVisible)
                 }}>SAVE</Button>
               <Button onPress={async () => {
                 await ResetDB()
-                setModalVisible(!modalVisible)
+                props.setModalVisible(!props.modalVisible)
               }}>ResetDB</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>
       </Modal>
-      <Button
-        onPress={() => {
-          clearModal()
-          setModalVisible(!modalVisible)
-        }}
-      >
-        +
-      </Button>
     </>
   )
 }
