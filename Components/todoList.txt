@@ -1,7 +1,7 @@
 Bugs:
-
+  
 Commit Message:
-  Type Buttons
+
 
 Colors: 
   P peach: #ff7160
@@ -10,11 +10,11 @@ Colors:
   purps: #ce2fff
 
 WIP
+  If habit.ID exists, edit instead of save duplicate.
   Set so can't save without Habit: Type, Name, Frequency. (Note not required?)
   DataFunctions - fill out functions
   + button on habit home should automatically set modal to that habit type
   Frequency - Set up Mon-Sun buttons to toggle
-  Create edit habit functionality
   TH icon (with 3 dots?....gradient over letters)
   rename app.json expo - Name and Slug
   
@@ -26,7 +26,6 @@ Future Features
   Double tap to edit Habit (currently will be loooooooongpress)
 
 Done?
-  Reactify Newly added Habit
   Modal - connecting to CreateHabit, modalVisible function
   Calendar day only show one dot of each type
   ButtonGroup - type setter function
@@ -35,4 +34,8 @@ Done?
   Move habit button function to DataFunctions
   Dots clear when the last selection is second habit in a category.
   Only keeping most recently added Habit. (habit.ID shows NaN)
+  Reactify Newly added Habit
+  Type Buttons
+  Factor out button from modal to make modal universal.
+  Started Create edit habit functionality
   Calendar - Call ConvertCalendarData
