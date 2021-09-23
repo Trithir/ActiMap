@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import {Button, Box, Center} from "native-base"
 import {ScrollView} from 'react-native';
-import { useEffect } from "react/cjs/react.development";
 
 export default function HabitType(props) {
   const [pressedP, setpressedP] = useState(props.Type == 'P' ? "outline" : "solid")
@@ -22,9 +21,7 @@ export default function HabitType(props) {
     setpressedM("solid")
     setpressedI("outline")
   }
-  // useEffect(() => {
-  //  pPress()
-  // }, [])
+
   return (
     <Box>
       <Center>

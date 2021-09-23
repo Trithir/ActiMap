@@ -1,4 +1,5 @@
 Bugs:
+  When switching to Landscape "Can't perform a React state update on an unmounted component."
   
 Commit Message:
 
@@ -11,10 +12,10 @@ Colors:
 
 WIP
 
+  Production build
+  Some way to view all habits?
   GetDailyHabits to show applicable habits for that day of the week.
-  HabitButton onPress should toggle completed or not
-  Set so can't save without Habit: Type, Name, Frequency, and Note
-  Frequency - Set up Mon-Sun buttons to toggle
+  Set so can't save without Habit: Type, Name, Habit_Days, and Note
   TH icon (with 3 dots?....gradient over letters)
   rename app.json expo - Name and Slug
   
@@ -39,3 +40,7 @@ Done?
   Factor out button from modal to make modal universal.
   Started Create edit habit functionality
   Calendar - Call ConvertCalendarData
+  added isMounted to Calendar useEffect (trying to fix bug)
+  Habit_Days - Set up Mon-Sun buttons to toggle
+  changed Frequency to Habit_days
+  HabitButton onPress should toggle completed or not

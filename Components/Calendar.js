@@ -7,10 +7,13 @@ export default function Calen(props) {
   const [calendarData, setcalendarData] = useState({})
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   useEffect(() => {
+    let isMounted = true;
     ConvertCalendarData(setrefreshToken)
-    .then(data =>
+    .then(data => {
+      if (isMounted) 
       setcalendarData(data)
-    );
+    });
+    return () => { isMounted = false };
   }, [refreshToken])
 
   return (

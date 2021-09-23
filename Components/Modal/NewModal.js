@@ -7,7 +7,7 @@ export function NewModalButton(props){
 
 return ( 
   <>
-    <HabitModal Name={''} Frequency={''} Type={props.Type} Note={''} modalVisible={modalVisible} setModalVisible={setModalVisible} setrefreshToken={props.setrefreshToken}/>
+    <HabitModal Name={''} Habit_Days={[]} Type={props.Type} Note={''} modalVisible={modalVisible} setModalVisible={setModalVisible} setrefreshToken={props.setrefreshToken}/>
     <Button
       onPress={() => {
         setModalVisible(!modalVisible)

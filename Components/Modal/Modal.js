@@ -1,15 +1,16 @@
 import React, {useState, useEffect, useRef} from "react"
 import { Modal, Button, Input } from "native-base"
-import HabitType from "./ButtonGroup"
-import {Frequency} from "./Frequency"
+import HabitType from "./HabitTypeSelector"
 import { CreateHabit, EditHabit, ResetDB } from "../DataFunctions"
+import WeekdaySelector from "./WeekdaySelector"
 
 export function HabitModal(props) {
   // const [modalVisible, setModalVisible] = useState(props.modalVisible)
   const [habitName, sethabitName] = useState(props.Name)
   const [habitNote, sethabitNote] = useState(props.Note)
-  const [habitFrequency, sethabitFrequency] = useState(props.Frequency)
   const [habitType, sethabitType] = useState(props.Type)
+  const [habitDays, sethabitDays] = useState(props.Habit_Days)
+
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
@@ -18,12 +19,6 @@ export function HabitModal(props) {
   }
   const habitNoteChange = (text) => {
     sethabitNote(text) 
-  }
-  function clearModal(){
-    sethabitName('')
-    sethabitNote('')
-    sethabitFrequency('')
-    sethabitType('')
   }
   return (
     <>
@@ -38,15 +33,14 @@ export function HabitModal(props) {
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
             <HabitType sethabitType={sethabitType} Type={habitType}/>
-            <Button onPress={() => console.log(habitType, habitName, habitFrequency, habitNote)}>Data?</Button>
+            <Button onPress={() => console.log(habitType, habitName, habitDays, habitNote)}>Data?</Button>
             <Input
               mt={4}
               value={habitName}
-              ref={initialRef}
               placeholder="Name your habit"
               onChangeText={habitNameChange}
             />
-            <Frequency sethabitFrequency={sethabitFrequency} />
+            <WeekdaySelector habitDays={habitDays} sethabitDays={sethabitDays}/>
             <Input
               mt={4}
               value={habitNote}
@@ -59,10 +53,10 @@ export function HabitModal(props) {
               <Button onPress={async () => {
                 // if props.ID exists, edit, else CreateHabit
                 if (props.ID) {
-                  await EditHabit({Name:habitName, Type:habitType, Creation_Date:props.Creation_Date, Deleted:props.Deleted, Frequency:habitFrequency, Note:habitNote, ID:props.ID}, props.setrefreshToken)
+                  await EditHabit({Name:habitName, Type:habitType, Creation_Date:props.Creation_Date, Deleted:props.Deleted, Habit_Days:habitDays, Note:habitNote, ID:props.ID}, props.setrefreshToken)
                   props.setModalVisible(!props.modalVisible)
                 }
-                else await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote}, props.setrefreshToken)
+                else await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)
                 props.setModalVisible(!props.modalVisible)
                 }}>SAVE</Button>
               <Button onPress={async () => {
