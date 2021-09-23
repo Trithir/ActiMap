@@ -10,10 +10,10 @@ Colors:
   purps: #ce2fff
 
 WIP
-  If habit.ID exists, edit instead of save duplicate.
-  Set so can't save without Habit: Type, Name, Frequency. (Note not required?)
-  DataFunctions - fill out functions
-  + button on habit home should automatically set modal to that habit type
+
+  GetDailyHabits to show applicable habits for that day of the week.
+  HabitButton onPress should toggle completed or not
+  Set so can't save without Habit: Type, Name, Frequency, and Note
   Frequency - Set up Mon-Sun buttons to toggle
   TH icon (with 3 dots?....gradient over letters)
   rename app.json expo - Name and Slug

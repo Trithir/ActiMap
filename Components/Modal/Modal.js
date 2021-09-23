@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from "react"
 import { Modal, Button, Input } from "native-base"
 import HabitType from "./ButtonGroup"
 import {Frequency} from "./Frequency"
-import { CreateHabit, ResetDB } from "../DataFunctions"
+import { CreateHabit, EditHabit, ResetDB } from "../DataFunctions"
 
 export function HabitModal(props) {
   // const [modalVisible, setModalVisible] = useState(props.modalVisible)
@@ -37,7 +37,7 @@ export function HabitModal(props) {
           <Modal.CloseButton />
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
-            <HabitType sethabitType={sethabitType}/>
+            <HabitType sethabitType={sethabitType} Type={habitType}/>
             <Button onPress={() => console.log(habitType, habitName, habitFrequency, habitNote)}>Data?</Button>
             <Input
               mt={4}
@@ -57,8 +57,12 @@ export function HabitModal(props) {
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               <Button onPress={async () => {
-                // if ID exists, edit, else CreateHabit
-                await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote}, props.setrefreshToken)
+                // if props.ID exists, edit, else CreateHabit
+                if (props.ID) {
+                  await EditHabit({Name:habitName, Type:habitType, Creation_Date:props.Creation_Date, Deleted:props.Deleted, Frequency:habitFrequency, Note:habitNote, ID:props.ID}, props.setrefreshToken)
+                  props.setModalVisible(!props.modalVisible)
+                }
+                else await CreateHabit({Name:habitName, Type:habitType,  Frequency:habitFrequency, Note:habitNote}, props.setrefreshToken)
                 props.setModalVisible(!props.modalVisible)
                 }}>SAVE</Button>
               <Button onPress={async () => {

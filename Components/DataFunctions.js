@@ -1,5 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+function GetDailyHabits() {
+  //Get current date
+  let currentDate = GetCurrentDate()
+  //List of all Habits available that day based on Frequency
+}
+
+function UndoHabitCompleted(date, id){
+  let currentDate = GetCurrentDate()
+  //remove ID from completed date
+}
+
 const readDB = async () => {
   try {
     const DB = await AsyncStorage.getItem('DB')
@@ -97,6 +108,15 @@ export async function CreateHabit(habit, cb) {
   cb(Math.random())
 }
 
+export async function EditHabit(habit, cb) {
+  if (!habit.ID) throw('EditHabit requies a completed habit.')
+  //updates habit.ID with new info
+  let data = await readDB()
+  data.Habits[habit.ID]=habit
+  await writeDB(data)
+  cb(Math.random())
+}
+
 export async function MarkHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
@@ -124,16 +144,7 @@ export async function IsCompletedYet(id) {
   } return false
 }
 
-function GetDailyHabits() {
-  //Get current date
-  let currentDate = GetCurrentDate()
-  //List of all Habits available that day based on Frequency
-}
 
-function UndoHabitCompleted(date, id){
-  let currentDate = GetCurrentDate()
-  //remove ID from completed date
-}
 
 // "Name":"Jogging","Type":"P","Frequency":2,"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
 function GetHabitDotsData(id, data) {

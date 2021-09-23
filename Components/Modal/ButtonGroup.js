@@ -1,27 +1,30 @@
 import React, {useState} from "react"
 import {Button, Box, Center} from "native-base"
 import {ScrollView} from 'react-native';
+import { useEffect } from "react/cjs/react.development";
 
 export default function HabitType(props) {
-  const [pressedP, setpressedP] = useState("solid")
-  const [pressedM, setpressedM] = useState("solid")
-  const [pressedI, setpressedI] = useState("solid")
+  const [pressedP, setpressedP] = useState(props.Type == 'P' ? "outline" : "solid")
+  const [pressedM, setpressedM] = useState(props.Type == 'M' ? "outline" : "solid")
+  const [pressedI, setpressedI] = useState(props.Type == 'I' ? "outline" : "solid")
   function pPress() {
     setpressedP("outline")
     setpressedM("solid")
     setpressedI("solid")
   }
   function mPress() {
-    setpressedM("outline")
     setpressedP("solid")
+    setpressedM("outline")
     setpressedI("solid")
   }
   function iPress() {
-    setpressedI("outline")
     setpressedP("solid")
     setpressedM("solid")
+    setpressedI("outline")
   }
-
+  // useEffect(() => {
+  //  pPress()
+  // }, [])
   return (
     <Box>
       <Center>
