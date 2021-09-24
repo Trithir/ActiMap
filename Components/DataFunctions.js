@@ -36,7 +36,7 @@ const readDB = async () => {
 }
 }
 
-export async function ResetDB(){
+export async function ResetDB(cb){
   let data = {"Habits":
   {"1":
   {"Name":"Jogger","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
@@ -56,6 +56,7 @@ export async function ResetDB(){
 }
 }
 await writeDB(data)
+cb(Math.random())
 }
 
 function GetHabit(id, data) {

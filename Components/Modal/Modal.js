@@ -59,8 +59,8 @@ export function HabitModal(props) {
                 else await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)
                 props.setModalVisible(!props.modalVisible)
                 }}
-                onPress={async () => {
-                  await ResetDB()
+                onLongPress={async () => {
+                  await ResetDB(props.setrefreshToken)
                   props.setModalVisible(!props.modalVisible)
                 }}
                 >SAVE</Button>
