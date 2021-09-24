@@ -132,7 +132,6 @@ function GetHabit(id, data) {
   }
   
   export async function UndoHabitCompleted(id, cb){
-    console.log('undohabit')
     let data = await readDB()
 
     function arrayRemove(arr, value) { 

@@ -33,7 +33,7 @@ export function HabitModal(props) {
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
             <HabitType sethabitType={sethabitType} Type={habitType}/>
-            <Button onPress={() => console.log(habitType, habitName, habitDays, habitNote)}>Data?</Button>
+            {/* <Button onPress={() => console.log(habitType, habitName, habitDays, habitNote)}>Data?</Button> */}
             <Input
               mt={4}
               value={habitName}
@@ -58,11 +58,16 @@ export function HabitModal(props) {
                 }
                 else await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)
                 props.setModalVisible(!props.modalVisible)
-                }}>SAVE</Button>
-              <Button onPress={async () => {
+                }}
+                onPress={async () => {
+                  await ResetDB()
+                  props.setModalVisible(!props.modalVisible)
+                }}
+                >SAVE</Button>
+              {/* <Button onPress={async () => {
                 await ResetDB()
                 props.setModalVisible(!props.modalVisible)
-              }}>ResetDB</Button>
+              }}>ResetHabits</Button> */}
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>

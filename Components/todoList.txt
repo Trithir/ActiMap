@@ -2,6 +2,9 @@ Bugs:
   When switching to Landscape "Can't perform a React state update on an unmounted component."
   
 Commit Message:
+  TH icons and splash (with 3 dots?....gradient over letters)
+  rename app.json expo - Name and Slug
+  Stacked WeekdaySelector buttons for ease of use
 
 
 Colors: 
@@ -13,11 +16,12 @@ Colors:
 WIP
 
   Production build
-  Some way to view all habits?
   GetDailyHabits to show applicable habits for that day of the week.
+  Modal background color to match selected habit type?
+  Clicking on calendar day opens list of habits completed on that day (as buttons)
+  Some way to view all habits?
   Set so can't save without Habit: Type, Name, Habit_Days, and Note
-  TH icon (with 3 dots?....gradient over letters)
-  rename app.json expo - Name and Slug
+  Add delete functionality to habits
   
 
 Maybe!

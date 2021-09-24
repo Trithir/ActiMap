@@ -26,7 +26,7 @@ export default function App() {
         <Row size={13}><Physical/></Row>
         <Row size={13}><Mental/></Row>
         <Row size={13}><Intake/></Row>
-        <Row size={52}><Calen/></Row>
+        <Row size={55}><Calen/></Row>
       </Grid>
     </NativeBaseProvider>
     :
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ce2fff',
     alignItems: 'center',
     justifyContent: 'center',
   },

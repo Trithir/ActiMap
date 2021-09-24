@@ -32,7 +32,7 @@ export default function Intake(props){
         color: "white",
       }}
     >
-      <Center>The substances we intake make a difference!</Center>
+      <Center>What we intake makes a difference!</Center>
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'I'}/>
         {intakeHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)}
