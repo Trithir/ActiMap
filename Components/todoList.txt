@@ -1,11 +1,8 @@
 Bugs:
   When switching to Landscape "Can't perform a React state update on an unmounted component."
-  
-Commit Message:
-  TH icons and splash (with 3 dots?....gradient over letters)
-  rename app.json expo - Name and Slug
-  Stacked WeekdaySelector buttons for ease of use
 
+Commit Message:
+  
 
 Colors: 
   P peach: #ff7160
@@ -16,7 +13,6 @@ Colors:
 WIP
 
   Production build
-  GetDailyHabits to show applicable habits for that day of the week.
   Modal background color to match selected habit type?
   Clicking on calendar day opens list of habits completed on that day (as buttons)
   Some way to view all habits?
@@ -40,6 +36,10 @@ Done?
   Dots clear when the last selection is second habit in a category.
   Only keeping most recently added Habit. (habit.ID shows NaN)
   Reactify Newly added Habit
+  TH icons and splash (with 3 dots?....gradient over letters)
+  rename app.json expo - Name and Slug
+  Stacked WeekdaySelector buttons for ease of use
+  Show applicable habits for that day of the week.
   Type Buttons
   Factor out button from modal to make modal universal.
   Started Create edit habit functionality
@@ -47,4 +47,5 @@ Done?
   added isMounted to Calendar useEffect (trying to fix bug)
   Habit_Days - Set up Mon-Sun buttons to toggle
   changed Frequency to Habit_days
+  New Modal button doesn't reset info. (Fixed)
   HabitButton onPress should toggle completed or not

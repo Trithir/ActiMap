@@ -1,10 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function GetDailyHabits() {
-  //Get current date
-  let currentDate = GetCurrentDate()
-  //List of all Habits available that day based on habitDays
-}
 
 
 const readDB = async () => {
@@ -75,17 +70,44 @@ function GetHabit(id, data) {
   
   export async function GetPhysicalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "P")
+    return Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H))
   }
   export async function GetMentalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "M")
+    return Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H))
   }
   export async function GetIntakeHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "I")
+    return Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H))
   }
   
+  export function GetDayOfWeek() {
+    let date = new Date()
+    let day = date.getDay()
+    let dayOfWeek = ''
+    switch(day) {
+      case 0: dayOfWeek = 'Sun'
+      break;
+      case 1: dayOfWeek = 'Mon'
+      break;
+      case 2: dayOfWeek = 'Tue'
+      break;
+      case 3: dayOfWeek = 'Wed'
+      break;
+      case 4: dayOfWeek = 'Thu'
+      break;
+      case 5: dayOfWeek = 'Fri'
+      break;
+      case 6: dayOfWeek = 'Sat'
+      break;
+    }
+    return dayOfWeek
+  }
+  
+  function IsTodayHabit(habit) {
+    return habit.Habit_Days.includes(GetDayOfWeek())
+  }
+
   const writeDB = async (data) => {
     try {
       await AsyncStorage.setItem('DB', JSON.stringify(data))

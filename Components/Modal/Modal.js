@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import { Modal, Button, Input } from "native-base"
 import HabitType from "./HabitTypeSelector"
-import { CreateHabit, EditHabit, ResetDB } from "../DataFunctions"
+import { CreateHabit, EditHabit, GetDayOfWeek, ResetDB } from "../DataFunctions"
 import WeekdaySelector from "./WeekdaySelector"
 
 export function HabitModal(props) {
@@ -20,6 +20,12 @@ export function HabitModal(props) {
   const habitNoteChange = (text) => {
     sethabitNote(text) 
   }
+  function ClearModal() {
+    sethabitName('') 
+    sethabitDays([]) 
+    sethabitType(props.type) 
+    sethabitNote('')
+  }
   return (
     <>
       <Modal
@@ -33,7 +39,7 @@ export function HabitModal(props) {
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
             <HabitType sethabitType={sethabitType} Type={habitType}/>
-            {/* <Button onPress={() => console.log(habitType, habitName, habitDays, habitNote)}>Data?</Button> */}
+            <Button onPress={() => (console.log(habitType, habitName, habitDays, habitNote), GetDayOfWeek())}>Data?</Button>
             <Input
               mt={4}
               value={habitName}
@@ -56,9 +62,11 @@ export function HabitModal(props) {
                   await EditHabit({Name:habitName, Type:habitType, Creation_Date:props.Creation_Date, Deleted:props.Deleted, Habit_Days:habitDays, Note:habitNote, ID:props.ID}, props.setrefreshToken)
                   props.setModalVisible(!props.modalVisible)
                 }
-                else await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)
+                else {await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)}
                 props.setModalVisible(!props.modalVisible)
-                }}
+                ClearModal()
+                }
+              }
                 onLongPress={async () => {
                   await ResetDB(props.setrefreshToken)
                   props.setModalVisible(!props.modalVisible)
