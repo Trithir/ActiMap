@@ -10,14 +10,18 @@ Colors:
   I lellow: #c8ff13
   purps: #ce2fff
 
+B4 Production
+  Pad Icons 
+  Some way to view all habits of a type. (To allow editing)
+  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
+
+
 WIP
 
+  Add delete functionality to habits
   Production build
   Modal background color to match selected habit type?
   Clicking on calendar day opens list of habits completed on that day (as buttons)
-  Some way to view all habits?
-  Set so can't save without Habit: Type, Name, Habit_Days, and Note
-  Add delete functionality to habits
   
 
 Maybe!
