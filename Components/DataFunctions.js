@@ -123,7 +123,10 @@ function GetHabit(id, data) {
     habit.Deleted = false
     habit.ID = Object.keys(data["Habits"]).length + 1
     data.Habits[habit.ID]=habit
-    await writeDB(data)
+    if (habit.Name == '') {
+      //do nothing
+    }
+    else await writeDB(data)
     cb(Math.random())
   }
   
@@ -132,10 +135,13 @@ function GetHabit(id, data) {
     //updates habit.ID with new info
     let data = await readDB()
     data.Habits[habit.ID]=habit
-    await writeDB(data)
+    if (habit.Name == '') {
+      //do nothing
+    }
+    else await writeDB(data)
     cb(Math.random())
   }
-  
+
   export async function MarkHabitCompleted(id, cb){
     let data = await readDB()
     let currentDate = GetCurrentDate()
