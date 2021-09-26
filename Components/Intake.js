@@ -1,19 +1,26 @@
-import { Center, Box } from 'native-base';
+import { Center, Box, Button } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
-import { GetIntakeHabits } from './DataFunctions';
+import { GetIntakeHabits, GetAllIntakeHabits } from './DataFunctions';
 import { NewModalButton } from './Modal/NewModal';
 import HabitButton from './HabitButton';
 
 export default function Intake(props){
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [intakeHabits, setintakeHabits] = useState([])
-    useEffect(() => {
-      GetIntakeHabits()
-        .then(data =>
-        setintakeHabits(data)
-      );
-    }, [refreshToken])
+  const [showAll, setshowAll] = useState(false)
+
+  useEffect(() => {
+    if(showAll) {
+    GetAllIntakeHabits()
+    .then(data =>
+      setintakeHabits(data))
+    }else {
+    GetIntakeHabits()
+    .then(data =>
+      setintakeHabits(data))
+    };
+  }, [refreshToken])
 
   return (
     <Box 
@@ -36,6 +43,7 @@ export default function Intake(props){
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'I'}/>
         {intakeHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)}
+        <Button variant={showAll ? "outline" :"solid"} onPress={() => {setshowAll(!showAll), setrefreshToken(Math.random())}}>All</Button>
       </ScrollView>
     </Box>
   )

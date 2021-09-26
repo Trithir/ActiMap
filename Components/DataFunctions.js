@@ -80,6 +80,19 @@ function GetHabit(id, data) {
     let data = await readDB()
     return Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H))
   }
+
+  export async function GetAllPhysicalHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "P")
+  }
+  export async function GetAllMentalHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "M")
+  }
+  export async function GetAllIntakeHabits() {
+    let data = await readDB()
+    return Object.values(data.Habits).filter((H) => H.Type == "I")
+  }
   
   export function GetDayOfWeek() {
     let date = new Date()

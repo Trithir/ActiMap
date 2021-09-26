@@ -24,7 +24,7 @@ export function HabitModal(props) {
   function ClearModal() {
     props.setModalVisible(!props.modalVisible)
     sethabitName('') 
-    sethabitDays([]) 
+    sethabitDays([GetDayOfWeek()]) 
     sethabitType(permType)
     sethabitNote('')
     setshowName(false)

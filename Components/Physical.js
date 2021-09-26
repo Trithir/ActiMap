@@ -1,18 +1,24 @@
-import { Center, Box } from 'native-base';
+import { Center, Box, Button } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {ScrollView} from 'react-native';
-import { GetPhysicalHabits } from './DataFunctions';
+import { GetAllPhysicalHabits, GetPhysicalHabits } from './DataFunctions';
 import HabitButton from './HabitButton';
 import { NewModalButton } from './Modal/NewModal';
 
 export default function Physical(props){
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [physicalHabits, setphysicalHabits] = useState([])
+  const [showAll, setshowAll] = useState(false)
     useEffect(() => {
+      if(showAll) {
+      GetAllPhysicalHabits()
+      .then(data =>
+        setphysicalHabits(data))
+      }else {
       GetPhysicalHabits()
-        .then(data =>
-        setphysicalHabits(data)
-      );
+      .then(data =>
+        setphysicalHabits(data))
+      };
     }, [refreshToken])
   
   return (
@@ -37,6 +43,7 @@ export default function Physical(props){
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'P'}/>
         {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)} 
+        <Button variant={showAll ? "outline" :"solid"} onPress={() => {setshowAll(!showAll), setrefreshToken(Math.random())}}>All</Button>
       </ScrollView>
     </Box>
   )

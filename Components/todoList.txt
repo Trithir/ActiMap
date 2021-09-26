@@ -2,6 +2,10 @@ Bugs:
   When switching to Landscape "Can't perform a React state update on an unmounted component."
 
 Commit Message:
+  Opening modal automatically sets current day of week
+  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
+  Pad Icons 
+  Some way to view all habits of a type. (To allow editing)
 
 
 Colors: 
@@ -11,15 +15,12 @@ Colors:
   purps: #ce2fff
 
 B4 Production
-  Pad Icons 
-  Some way to view all habits of a type. (To allow editing)
-  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
+  Add delete functionality to habits
 
 
 WIP
 
-  Opening modal automatically sets current day of week
-  Add delete functionality to habits
+  Auto scroll to beginning when collapsing show all habits
   Production build
   Modal background color to match selected habit type?
   Clicking on calendar day opens list of habits completed on that day (as buttons)
