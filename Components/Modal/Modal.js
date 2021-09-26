@@ -43,7 +43,7 @@ export function HabitModal(props) {
           <Modal.Header>Habit Setter!</Modal.Header>
           <Modal.Body>
             <HabitType sethabitType={sethabitType} Type={habitType}/>
-            <Button onPress={() => (console.log(habitType, habitName, habitDays, habitNote), GetDayOfWeek())}>Data?</Button>
+            {/* <Button onPress={() => (console.log(habitType, habitName, habitDays, habitNote), GetDayOfWeek())}>Data?</Button> */}
             <FormControl isRequired isInvalid={showName}>
               <Input
                 mt={4}
@@ -71,18 +71,15 @@ export function HabitModal(props) {
               <Button onPress={async () => {
                 if (habitName == '') {
                   setshowName(true)
-                } 
-                if (props.ID) {
+                } else {
+                  if (props.ID) {
                     await EditHabit({Name:habitName, Type:habitType, Creation_Date:props.Creation_Date, Deleted:props.Deleted, Habit_Days:habitDays, Note:habitNote, ID:props.ID}, props.setrefreshToken)
                   }
                   else {
                     await CreateHabit({Name:habitName, Type:habitType,  Habit_Days:habitDays, Note:habitNote}, props.setrefreshToken)
                   }                  
-                  if (habitName == '') {
-                    //do nothing
-                  }
-                  else ClearModal()
-              }}
+                  ClearModal()
+                }}}
                 onLongPress={async () => {
                   await ResetDB(props.setrefreshToken)
                   props.setModalVisible(!props.modalVisible)
