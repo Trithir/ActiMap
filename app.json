@@ -3,7 +3,7 @@
     "name": "TriHabits",
     "slug": "TriHabits",
     "version": "0.1.0",
-    "icon": "./assets/TriHabit-icon.png",
+    "icon": "./assets/TriHabit_icon.png",
     "splash": {
       "image": "./assets/TriHabit-splash.png",
       "resizeMode": "cover"
@@ -15,18 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-TriHabit-icon.png",
+        "foregroundImage": "./assets/Adaptive-TriHabit-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.trithir.TriHabits"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/TriHabit-favicon.png"
     },
-    "description": "Simple habit tracking app."
+    "description": "Set simple Habits to help improve well-being."
   }
 }
