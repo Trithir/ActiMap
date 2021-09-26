@@ -1,7 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
 const readDB = async () => {
   try {
     const DB = await AsyncStorage.getItem('DB')
@@ -70,28 +68,28 @@ function GetHabit(id, data) {
   
   export async function GetPhysicalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H))
+    return Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
   }
   export async function GetMentalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H))
+    return Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
   }
   export async function GetIntakeHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H))
+    return Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
   }
 
   export async function GetAllPhysicalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "P")
+    return Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => H.Deleted == false)
   }
   export async function GetAllMentalHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "M")
+    return Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => H.Deleted == false)
   }
   export async function GetAllIntakeHabits() {
     let data = await readDB()
-    return Object.values(data.Habits).filter((H) => H.Type == "I")
+    return Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => H.Deleted == false)
   }
   
   export function GetDayOfWeek() {
@@ -136,10 +134,7 @@ function GetHabit(id, data) {
     habit.Deleted = false
     habit.ID = Object.keys(data["Habits"]).length + 1
     data.Habits[habit.ID]=habit
-    if (habit.Name == '') {
-      //do nothing
-    }
-    else await writeDB(data)
+    await writeDB(data)
     cb(Math.random())
   }
   
@@ -148,10 +143,15 @@ function GetHabit(id, data) {
     //updates habit.ID with new info
     let data = await readDB()
     data.Habits[habit.ID]=habit
-    if (habit.Name == '') {
-      //do nothing
-    }
-    else await writeDB(data)
+    await writeDB(data)
+    cb(Math.random())
+  }
+
+  export async function DeleteHabit(ID, cb) {
+    if (!ID) throw('DeleteHabit requies a completed habit.')
+    let data = await readDB()
+    data.Habits[ID].Deleted=true
+    await writeDB(data)
     cb(Math.random())
   }
 

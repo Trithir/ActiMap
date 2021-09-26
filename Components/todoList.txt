@@ -2,10 +2,6 @@ Bugs:
   When switching to Landscape "Can't perform a React state update on an unmounted component."
 
 Commit Message:
-  Opening modal automatically sets current day of week
-  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
-  Pad Icons 
-  Some way to view all habits of a type. (To allow editing)
 
 
 Colors: 
@@ -33,6 +29,10 @@ Future Features
   Double tap to edit Habit (currently will be loooooooongpress)
 
 Done?
+  Opening modal automatically sets current day of week
+  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
+  Pad Icons 
+  Some way to view all habits of a type. (To allow editing)
   Modal - connecting to CreateHabit, modalVisible function
   Calendar day only show one dot of each type
   ButtonGroup - type setter function
