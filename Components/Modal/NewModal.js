@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button } from 'native-base';
+import { Button, AddIcon } from 'native-base';
 import { HabitModal } from './Modal';
 import { GetDayOfWeek } from '../DataFunctions';
 
@@ -14,7 +14,7 @@ return (
         setModalVisible(!modalVisible)
       }}
     >
-      +
+      <AddIcon size="10px" color='white'/>
     </Button>
   </>
 )}

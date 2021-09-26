@@ -1,6 +1,6 @@
-import { Center, Box, Button } from 'native-base';
+import { Center, Box, Button, ChevronRightIcon, ChevronLeftIcon } from 'native-base';
 import React, { useState, useEffect } from 'react';
-import {ScrollView} from 'react-native';
+import { ScrollView } from 'react-native';
 import { GetAllPhysicalHabits, GetPhysicalHabits } from './DataFunctions';
 import HabitButton from './HabitButton';
 import { NewModalButton } from './Modal/NewModal';
@@ -43,7 +43,13 @@ export default function Physical(props){
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'P'}/>
         {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)} 
-        <Button variant={showAll ? "outline" :"solid"} onPress={() => {setshowAll(!showAll), setrefreshToken(Math.random())}}>All</Button>
+        <Button variant={showAll ? "outline" :"solid"} onPress={() => {setshowAll(!showAll), setrefreshToken(Math.random())}}>
+          {showAll ? 
+            <ChevronLeftIcon size="18px" color='white'/>
+            :
+            <ChevronRightIcon size="18px" color='white'/>
+          }
+        </Button>
       </ScrollView>
     </Box>
   )

@@ -11,7 +11,6 @@ Colors:
   purps: #ce2fff
 
 B4 Production
-  Add delete functionality to habits
 
 
 WIP
@@ -29,6 +28,9 @@ Future Features
   Double tap to edit Habit (currently will be loooooooongpress)
 
 Done?
+  Added showAll chevrons that point open/close
+  Added AddIcon to NewModal instead of plus sign
+  Add delete functionality to habits
   Opening modal automatically sets current day of week
   Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
   Pad Icons 
