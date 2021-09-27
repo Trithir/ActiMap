@@ -22,6 +22,7 @@ WIP
   
 
 Maybe!
+  Dots streaks!
   All habits completed shows dot (vs any amount completed)
 
 Future Features
@@ -57,3 +58,7 @@ Done?
   changed Frequency to Habit_days
   New Modal button doesn't reset info. (Fixed)
   HabitButton onPress should toggle completed or not
+
+  To Check Manifest:
+    Navigate terminal to D/Downloads.
+    run bundletool dump manifest --bundle TriHabits-1cea9516d85a4f8d8913aae2ccf2d504-signed.aab

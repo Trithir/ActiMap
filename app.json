@@ -15,14 +15,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.trithir.TriHabits"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/Adaptive-TriHabit-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.trithir.TriHabits"
+      "package": "com.trithir.TriHabits",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/TriHabit-favicon.png"
