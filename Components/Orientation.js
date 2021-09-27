@@ -5,16 +5,17 @@ export function useOrientation(){
   const [orientation, setOrientation] = useState("PORTRAIT");
  
   useEffect(() => {
+    let isMounted = true;
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
-      if (width<height) {
+      if (width<height && isMounted) {
         setOrientation("PORTRAIT")
         Dimensions.removeEventListener('change', ({window:{width,height}}))
-      } else {
+      } else if (isMounted){
         setOrientation("LANDSCAPE")
         Dimensions.removeEventListener('change', ({window:{width,height}}))
       }
     })
-
+    return () => { isMounted = false };
   }, []);
 
   return orientation;
