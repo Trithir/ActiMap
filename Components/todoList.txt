@@ -1,11 +1,9 @@
 Bugs:
-  When switching to Landscape "Can't perform a React state update on an unmounted component."
   Switching Habit type doesn't refresh new list Habit goes in to.
   Stephen needs to click twice on expand button for it to open.
 
 
 Feedback:
-  Horizontal Modal....Turn off Landscape?
   Delete popup "hold to delete"
 
 Commit Message:
@@ -43,6 +41,8 @@ WIP
 Released Builds: 
 
   0.1.1:
+  Horizontal Modal....Turn off Landscape?
+  When switching to Landscape "Can't perform a React state update on an unmounted component."
   Change shape of +/> buttons
   Calendar text color to white.
   Text color for completed habits. Everyone else sees blue text, make white.
