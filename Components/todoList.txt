@@ -40,7 +40,7 @@ WIP
 
 Released Builds: 
 
-  0.1.1:
+  0.2.0:
   Horizontal Modal....Turn off Landscape?
   When switching to Landscape "Can't perform a React state update on an unmounted component."
   Change shape of +/> buttons
