@@ -4,6 +4,7 @@
     "slug": "TriHabits",
     "version": "0.1.1",
     "icon": "./assets/TriHabit_icon.png",
+    "orientation": "portrait",
     "splash": {
       "image": "./assets/TriHabit-splash.png",
       "resizeMode": "cover"
