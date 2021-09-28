@@ -1,7 +1,18 @@
 Bugs:
   When switching to Landscape "Can't perform a React state update on an unmounted component."
+  Switching Habit type doesn't refresh new list Habit goes in to.
+  Stephen needs to click twice on expand button for it to open.
+
+
+Feedback:
+  Horizontal Modal....Turn off Landscape?
+  Delete popup "hold to delete"
 
 Commit Message:
+  Change shape of +/> buttons
+  Calendar text color to white.
+  Text color for completed habits. Everyone else sees blue text, make white.
+  Second time Longpressing Habit no data filled in. 
 
 
 Colors: 
@@ -12,53 +23,65 @@ Colors:
 
 B4 Production
 
-
 WIP
 
+  All habits completed shows dot (vs any amount completed) 
+    habitDays.length == habitTypeTotal return dot
   Auto scroll to beginning when collapsing show all habits
-  Production build
   Modal background color to match selected habit type?
-  Clicking on calendar day opens list of habits completed on that day (as buttons)
+  Implement double tap (for something...)
+  Production build
+
+  Calendar modal ideas:
+    
+    list of [days] a habit was completed
+    % of completes per habit
+    most/least completed
+    time completed
+      average time completed
+    Clicking on calendar day opens list of habits completed on that day (as buttons)  
+    Dots streaks!
+
+
+
+Released Builds: 
+
+  0.2.0:
+
+  0.1.0:
+    Added showAll chevrons that point open/close
+    Added AddIcon to NewModal instead of plus sign
+    Add delete functionality to habits
+    Opening modal automatically sets current day of week
+    Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
+    Pad Icons 
+    Some way to view all habits of a type. (To allow editing)
+    Modal - connecting to CreateHabit, modalVisible function
+    Calendar day only show one dot of each type
+    ButtonGroup - type setter function
+    Habit buttons on/off (isCompleted) functionality
+    Physical/Mental/Intake - Map over habits to render buttons
+    Move habit button function to DataFunctions
+    Dots clear when the last selection is second habit in a category.
+    Only keeping most recently added Habit. (habit.ID shows NaN)
+    Reactify Newly added Habit
+    TH icons and splash (with 3 dots?....gradient over letters)
+    rename app.json expo - Name and Slug
+    Stacked WeekdaySelector buttons for ease of use
+    Show applicable habits for that day of the week.
+    Type Buttons
+    Factor out button from modal to make modal universal.
+    Started Create edit habit functionality
+    Calendar - Call ConvertCalendarData
+    added isMounted to Calendar useEffect (trying to fix bug)
+    Habit_Days - Set up Mon-Sun buttons to toggle
+    changed Frequency to Habit_days
+    New Modal button doesn't reset info. (Fixed)
+    HabitButton onPress should toggle completed or not
+
   
+  
+To Check Manifest:
+  Navigate terminal to D/Downloads.
+  run bundletool dump manifest --bundle TriHabits-1cea9516d85a4f8d8913aae2ccf2d504-signed.aab
 
-Maybe!
-  Dots streaks!
-  All habits completed shows dot (vs any amount completed)
-
-Future Features
-  Double tap to edit Habit (currently will be loooooooongpress)
-
-Done?
-  Added showAll chevrons that point open/close
-  Added AddIcon to NewModal instead of plus sign
-  Add delete functionality to habits
-  Opening modal automatically sets current day of week
-  Set so can't save without Habit: Name, Habit_Days. Alert fields that need to be completed if not completed.
-  Pad Icons 
-  Some way to view all habits of a type. (To allow editing)
-  Modal - connecting to CreateHabit, modalVisible function
-  Calendar day only show one dot of each type
-  ButtonGroup - type setter function
-  Habit buttons on/off (isCompleted) functionality
-  Physical/Mental/Intake - Map over habits to render buttons
-  Move habit button function to DataFunctions
-  Dots clear when the last selection is second habit in a category.
-  Only keeping most recently added Habit. (habit.ID shows NaN)
-  Reactify Newly added Habit
-  TH icons and splash (with 3 dots?....gradient over letters)
-  rename app.json expo - Name and Slug
-  Stacked WeekdaySelector buttons for ease of use
-  Show applicable habits for that day of the week.
-  Type Buttons
-  Factor out button from modal to make modal universal.
-  Started Create edit habit functionality
-  Calendar - Call ConvertCalendarData
-  added isMounted to Calendar useEffect (trying to fix bug)
-  Habit_Days - Set up Mon-Sun buttons to toggle
-  changed Frequency to Habit_days
-  New Modal button doesn't reset info. (Fixed)
-  HabitButton onPress should toggle completed or not
-
-  To Check Manifest:
-    Navigate terminal to D/Downloads.
-    run bundletool dump manifest --bundle TriHabits-1cea9516d85a4f8d8913aae2ccf2d504-signed.aab

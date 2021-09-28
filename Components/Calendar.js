@@ -45,6 +45,9 @@ export default function Calen(props) {
         calendarBackground: '#ce2fff',
         todayTextColor: '#FF5310',
         indicatorColor: 'blue',
+        dayTextColor: '#f7f7f7',
+        monthTextColor: '#f7f7f7',
+        textDisabledColor: '#21233d',
       }}
       />
     </Box>

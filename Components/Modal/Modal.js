@@ -34,7 +34,7 @@ export function HabitModal(props) {
     <>
       <Modal
         isOpen={props.modalVisible}
-        onClose={() => {props.setModalVisible(false), ClearModal()}}
+        onClose={() => {props.setModalVisible(false); if(!props.ID){ClearModal()}}}
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
       >

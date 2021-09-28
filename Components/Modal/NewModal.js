@@ -10,6 +10,7 @@ return (
   <>
     <HabitModal Name={''} Habit_Days={[day]} Type={props.Type} Note={''} modalVisible={modalVisible} setModalVisible={setModalVisible} setrefreshToken={props.setrefreshToken}/>
     <Button
+      colorScheme="green"
       onPress={() => {
         setModalVisible(!modalVisible)
       }}

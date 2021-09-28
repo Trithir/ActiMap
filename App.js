@@ -18,8 +18,6 @@ export default function App() {
   }
 
   return (
-    
-    useOrientation() == "PORTRAIT" ?
     <NativeBaseProvider config={config} >
       <Grid style={styles.container}>
         <Row size={3.5}><TopBar/></Row>
@@ -28,22 +26,7 @@ export default function App() {
         <Row size={13}><Intake/></Row>
         <Row size={55}><Calen/></Row>
       </Grid>
-    </NativeBaseProvider>
-    :
-    <NativeBaseProvider config={config}>
-      <Grid style={styles.container}>
-        <Col style={styles.col}>
-          <Row size={33}><Physical/></Row>
-          <Row size={33}><Mental/></Row>
-          <Row size={33}><Intake/></Row>
-        </Col>
-        <Col>
-          <Row size={6}><CalendarFiller /></Row>
-          <Row size={80}><Calen/></Row>
-          <Row size={10}><CalendarFiller /></Row>
-        </Col>
-      </Grid>
-    </NativeBaseProvider>
+    </NativeBaseProvider>   
   );
 }
 
@@ -59,7 +42,7 @@ const styles = StyleSheet.create({
   },
   col: {
     flex: 1,
-    backgroundColor: '#ce2fff',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },

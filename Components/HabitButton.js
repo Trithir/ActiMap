@@ -17,5 +17,5 @@ export default function HabitButton(props){
 return (
   <>
     <HabitModal Name={props.Name} Type={props.Type} Habit_Days={props.Habit_Days} Note={props.Note} modalVisible={modalVisible} setModalVisible=      {setModalVisible} ID={props.ID} Creation_Date={props.Creation_Date} Deleted={props.Deleted} setrefreshToken={props.setrefreshToken}/>
-    <Button variant={completed ? "outline" :"solid"} onPress={async () => ToggleHabitCompleted(props.ID, setrefreshToken)} onLongPress={() =>       setModalVisible(true)}>{props.Name}</Button></>)
+    <Button variant={completed ? "outline" :"solid"} _text={{color:'white'}} onPress={async () => ToggleHabitCompleted(props.ID, setrefreshToken)} onLongPress={() =>       setModalVisible(true)}>{props.Name}</Button></>)
 }
