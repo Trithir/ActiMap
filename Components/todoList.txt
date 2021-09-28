@@ -9,10 +9,6 @@ Feedback:
   Delete popup "hold to delete"
 
 Commit Message:
-  Change shape of +/> buttons
-  Calendar text color to white.
-  Text color for completed habits. Everyone else sees blue text, make white.
-  Second time Longpressing Habit no data filled in. 
 
 
 Colors: 
@@ -46,7 +42,11 @@ WIP
 
 Released Builds: 
 
-  0.2.0:
+  0.1.1:
+  Change shape of +/> buttons
+  Calendar text color to white.
+  Text color for completed habits. Everyone else sees blue text, make white.
+  Second time Longpressing Habit no data filled in. 
 
   0.1.0:
     Added showAll chevrons that point open/close

@@ -2,7 +2,7 @@
   "expo": {
     "name": "TriHabits",
     "slug": "TriHabits",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "icon": "./assets/TriHabit_icon.png",
     "splash": {
       "image": "./assets/TriHabit-splash.png",
