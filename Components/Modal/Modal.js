@@ -10,7 +10,9 @@ export function HabitModal(props) {
   const [habitType, sethabitType] = useState(props.Type)
   const [habitDays, sethabitDays] = useState(props.Habit_Days)
   const [showName, setshowName] = useState(false)
+  const [deleteText, setdeleteText] = useState('Delete')
   const permType = props.Type
+
 
   const initialRef = useRef(null)
   const finalRef = useRef(null)
@@ -63,9 +65,9 @@ export function HabitModal(props) {
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               {props.ID ? 
-                <Button onLongPress={async () =>{
+                <Button onPress={() => setdeleteText('Hold to Delete')} onLongPress={async () =>{
                   await DeleteHabit(props.ID, props.setrefreshToken)
-                }}>Delete</Button>
+                }}>{deleteText}</Button>
                 : <></> 
               } 
               <Button onPress={async () => {

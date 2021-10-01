@@ -4,7 +4,6 @@ Bugs:
 
 
 Feedback:
-  Delete popup "hold to delete"
 
 Commit Message:
 
@@ -39,8 +38,11 @@ WIP
 
 Released Builds: 
 
-  0.2.0:
+  0.2.1
+  Delete popup "hold to delete"
   added semicolon to habit onpress
+
+  0.2.0:
   Horizontal Modal....Turn off Landscape?
   When switching to Landscape "Can't perform a React state update on an unmounted component."
   Change shape of +/> buttons
