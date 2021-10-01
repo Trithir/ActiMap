@@ -2,7 +2,7 @@
   "expo": {
     "name": "TriHabits",
     "slug": "TriHabits",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "icon": "./assets/TriHabit_icon.png",
     "orientation": "portrait",
     "splash": {
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/Adaptive-TriHabit-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "versionCode":2,
+      "versionCode":3,
       "package": "com.trithir.TriHabits",
       "permissions": []
     },
