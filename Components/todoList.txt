@@ -8,7 +8,6 @@ Feedback:
 
 Commit Message:
 
-
 Colors: 
   P peach: #ff7160
   M teal: #4bfffb
@@ -41,6 +40,7 @@ WIP
 Released Builds: 
 
   0.2.0:
+  added semicolon to habit onpress
   Horizontal Modal....Turn off Landscape?
   When switching to Landscape "Can't perform a React state update on an unmounted component."
   Change shape of +/> buttons

@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/Adaptive-TriHabit-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "versionCode":"2",
+      "versionCode":2,
       "package": "com.trithir.TriHabits",
       "permissions": []
     },
