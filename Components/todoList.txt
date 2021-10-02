@@ -1,10 +1,12 @@
 Bugs:
   Switching Habit type doesn't refresh new list Habit goes in to.
   Stephen needs to click twice on expand button for it to open.
+  Full reset after clearing DB?
+
 
 
 Feedback:
-
+  
 Commit Message:
 
 Colors: 
@@ -37,18 +39,22 @@ WIP
 
 
 Released Builds: 
+  0.2.2
+    Catch in CompletedModal for empty days.
+    Clicking calendar day gives list of habits completed that day.
+    Clearing DB removes ALL dot data and sets default Habits. 
 
   0.2.1
-  Delete popup "hold to delete"
-  added semicolon to habit onpress
+    Delete popup "hold to delete"
+    added semicolon to habit onpress
 
   0.2.0:
-  Horizontal Modal....Turn off Landscape?
-  When switching to Landscape "Can't perform a React state update on an unmounted component."
-  Change shape of +/> buttons
-  Calendar text color to white.
-  Text color for completed habits. Everyone else sees blue text, make white.
-  Second time Longpressing Habit no data filled in. 
+    Horizontal Modal....Turn off Landscape?
+    When switching to Landscape "Can't perform a React state update on an unmounted component."
+    Change shape of +/> buttons
+    Calendar text color to white.
+    Text color for completed habits. Everyone else sees blue text, make white.
+    Second time Longpressing Habit no data filled in. 
 
   0.1.0:
     Added showAll chevrons that point open/close

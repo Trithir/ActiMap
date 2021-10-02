@@ -7,21 +7,22 @@ const readDB = async () => {
       return JSON.parse(DB)
     }
     else return {"Habits":
-    {"1":
-    {"Name":"Jogger","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
+    {
+    "1":
+    {"Name":"Jog","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
     "2":
-    {"Name":"Meditate","Type":"M","Habit_Days":['Tue', 'Wed', 'Thu'],"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
+    {"Name":"Meditate","Type":"M","Habit_Days":['Tue', 'Wed', 'Thu'],"Note":"Two 3 minute sessions, or one 6 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
     "3":
     {"Name":"Greens","Type":"I","Habit_Days":['Mon', 'Tue', 'Sat'],"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
     "4":
-    {"Name":"Read","Type":"M","Habit_Days":['Sun', 'Tue', 'Fri'],"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
+    {"Name":"Read","Type":"M","Habit_Days":['Sun', 'Tue', 'Fri'],"Note":"Read 1 chapter","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
   },
   
   "Completed_Bits":{
-    "2021-09-03":{"IDS":[1,2]},
-    "2021-09-04":{"IDS":[2,3]},
-    "2021-09-06":{"IDS":[1,2,3]},
-    "2021-09-15":{"IDS":[2,3]}
+    // "2021-09-03":{"IDS":[1,2]},
+    // "2021-09-04":{"IDS":[2,3]},
+    // "2021-09-06":{"IDS":[1,2,3]},
+    // "2021-09-15":{"IDS":[2,3]}
   }
 }
 } catch(e) {
@@ -30,42 +31,46 @@ const readDB = async () => {
 }
 
 export async function ResetDB(cb){
-  let data = {"Habits":
-  {"1":
-  {"Name":"Jogger","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
+  let data = {"Habits":{
+  "1":
+  {"Name":"Jog","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
   "2":
-  {"Name":"Meditate","Type":"M","Habit_Days":['Tue', 'Wed', 'Thu'],"Note":"Two 10 minute sessions, or one 20 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
+  {"Name":"Meditate","Type":"M","Habit_Days":['Tue', 'Wed', 'Thu'],"Note":"Two 3 minute sessions, or one 6 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
   "3":
   {"Name":"Greens","Type":"I","Habit_Days":['Mon', 'Tue', 'Sat'],"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
   "4":
-  {"Name":"Read","Type":"M","Habit_Days":['Sun', 'Tue', 'Fri'],"Note":"Read 3 chapters","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
+  {"Name":"Read","Type":"M","Habit_Days":['Sun', 'Tue', 'Fri'],"Note":"Read 1 chapter","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
 },
 
 "Completed_Bits":{
-  "2021-09-03":{"IDS":[1,2]},
-  "2021-09-04":{"IDS":[2,3]},
-  "2021-09-06":{"IDS":[1,2,3]},
-  "2021-09-15":{"IDS":[2,3]}
+  
 }
 }
 await writeDB(data)
 cb(Math.random())
 }
 
-function GetHabit(id, data) {
-  return (
-    data.Habits[id]
-    );
-  }
-  
-  function GetCurrentDate(){
-    let currentDate = new Date();
-    let cDay = currentDate.getDate().toString().padStart(2, "0")
-    let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
-    let cYear = currentDate.getFullYear().toString()
-    return (cYear + "-" + cMonth + "-" + cDay)
-  }
-  
+  function GetHabit(id, data) {
+    return (
+      data.Habits[id]
+      );
+    }
+    
+    export function GetCurrentDate(){
+      let currentDate = new Date();
+      let cDay = currentDate.getDate().toString().padStart(2, "0")
+      let cMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0")
+      let cYear = currentDate.getFullYear().toString()
+      return (cYear + "-" + cMonth + "-" + cDay)
+    }
+    
+    export async function GetOldCompletedHabits(date) {
+      let data = await readDB()
+      if (data.Completed_Bits[date]){
+        return data.Completed_Bits[date].IDS.map((id) => GetHabit(id, data))
+      }
+    }
+
   export async function GetPhysicalHabits() {
     let data = await readDB()
     return Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)

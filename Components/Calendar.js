@@ -1,11 +1,15 @@
 import { Box } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import { ConvertCalendarData } from './DataFunctions';
+import { ConvertCalendarData, GetOldCompletedHabits, GetCurrentDate } from './DataFunctions';
+import { CompletedModal } from './Modal/CompletedModal';
 
 export default function Calen(props) {
   const [calendarData, setcalendarData] = useState({})
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [pressedDay, setpressedDay] = useState(GetCurrentDate())
+
   useEffect(() => {
     let isMounted = true;
     ConvertCalendarData(setrefreshToken)
@@ -33,8 +37,9 @@ export default function Calen(props) {
       //   fontWeight: "bold",
       // }}
     >
+      <CompletedModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={pressedDay}/>
       <Calendar
-      onDayPress={(day) => {console.log('selected day', day)}}
+      onDayPress={(day) => {setModalVisible(true), setpressedDay(day.dateString)}}
       onDayLongPress={(day) => {console.log('selected day', day, 'long')}}
       markingType={'multi-dot'}
       markedDates={ calendarData }
