@@ -38,6 +38,8 @@ WIP
 
 Released Builds: 
 
+  0.2.3
+
   0.2.2
     time completed added to button click on completed modal
     Habit buttons in completed modal show as habit color.
