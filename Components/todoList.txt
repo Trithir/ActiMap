@@ -1,7 +1,6 @@
 Bugs:
   Switching Habit type doesn't refresh new list Habit goes in to.
   Stephen needs to click twice on expand button for it to open.
-  Full reset after clearing DB?
 
 
 
@@ -24,6 +23,7 @@ WIP
   Auto scroll to beginning when collapsing show all habits
   Modal background color to match selected habit type?
   Implement double tap (for something...)
+  1 time alert for Updates
   Production build
 
   Calendar modal ideas:
@@ -31,17 +31,19 @@ WIP
     list of [days] a habit was completed
     % of completes per habit
     most/least completed
-    time completed
       average time completed
-    Clicking on calendar day opens list of habits completed on that day (as buttons)  
     Dots streaks!
 
 
 
 Released Builds: 
+
   0.2.2
+    time completed added to button click on completed modal
+    Habit buttons in completed modal show as habit color.
+    Completed_Bits object changed to add Time.
+    Clicking on calendar day opens list of habits completed on that day (as buttons)  
     Catch in CompletedModal for empty days.
-    Clicking calendar day gives list of habits completed that day.
     Clearing DB removes ALL dot data and sets default Habits. 
 
   0.2.1

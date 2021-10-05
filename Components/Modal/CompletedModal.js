@@ -1,13 +1,12 @@
 import React, {useState, useRef, useEffect} from "react"
-import { Modal, Button, Input, FormControl, Center } from "native-base"
+import { Modal, Button, Center, Text } from "native-base"
 import { ScrollView } from 'react-native';
-import HabitButton from "../HabitButton"
-import HabitType from "./HabitTypeSelector"
-import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, GetOldCompletedHabits, ResetDB } from "../DataFunctions"
-import WeekdaySelector from "./WeekdaySelector"
+import { GetCompletedIDS, GetOldCompletedHabits, GetTimeOfDay, SetCompletedHabitButtonColor } from "../DataFunctions"
 
 export function CompletedModal(props) {
   const [completedHabits, setcompletedHabits] = useState([])
+  const [habitTime, sethabitTime] = useState('')
+  const [habitName, sethabitName] = useState('')
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
@@ -30,12 +29,18 @@ export function CompletedModal(props) {
           <Center>
           <Modal.Header>Completed {props.date}</Modal.Header>
           <Modal.Body>
-          <ScrollView horizontal={true}>
-            {completedHabits ? 
-              completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted}>{habit.Name}</Button>)
-              : <Button>No Habits to view</Button>
-            }
-          </ScrollView>
+          <Center>
+            <ScrollView horizontal={true}>
+              {completedHabits ? 
+                completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} backgroundColor={SetCompletedHabitButtonColor(habit.Type)} color="white" onPress={() => {sethabitTime(habit.Time); sethabitName(habit.Name)}}>{habit.Name}</Button>)
+                : <Button onPress={() => {props.setModalVisible(false)}} colorScheme="secondary" >None today</Button>
+              }
+            </ScrollView>
+          </Center>
+          {habitName ?
+            <Text mt={2}>Completed {habitName} at {habitTime}</Text>
+            : ''
+          }
           </Modal.Body>
           </Center>
           <Modal.Footer>
