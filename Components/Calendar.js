@@ -8,7 +8,7 @@ export default function Calen(props) {
   const [calendarData, setcalendarData] = useState({})
   const [refreshToken, setrefreshToken] = useState(props.refreshToken)
   const [modalVisible, setModalVisible] = useState(false)
-  const [pressedDay, setpressedDay] = useState(GetCurrentDate())
+  const [pressedDay, setpressedDay] = useState(undefined)
 
   useEffect(() => {
     let isMounted = true;

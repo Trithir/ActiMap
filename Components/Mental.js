@@ -43,7 +43,7 @@ export default function Mental(props){
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'M'}/>
         {mentalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)}
-        <Button colorScheme="green" variant={showAll ? "outline" :"solid"} onPress={() => {setshowAll(!showAll); setrefreshToken(Math.random())}}>
+        <Button colorScheme="green" onPress={() => {setshowAll(!showAll); setrefreshToken(Math.random())}}>
           {showAll ? 
             <ChevronLeftIcon size="18px" color='white'/>
             :
