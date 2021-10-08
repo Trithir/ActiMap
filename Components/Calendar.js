@@ -37,7 +37,9 @@ export default function Calen(props) {
       //   fontWeight: "bold",
       // }}
     >
-      <CompletedModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={pressedDay}/>
+      {modalVisible && 
+        <CompletedModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={pressedDay}/>
+      }
       <Calendar
       onDayPress={(day) => {setModalVisible(true), setpressedDay(day.dateString)}}
       onDayLongPress={(day) => {console.log('selected day', day, 'long')}}

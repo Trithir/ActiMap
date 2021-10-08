@@ -4,17 +4,22 @@ import { ScrollView } from 'react-native';
 import { GetCompletedIDS, GetOldCompletedHabits, GetTimeOfDay, SetCompletedHabitButtonColor } from "../DataFunctions"
 
 export function CompletedModal(props) {
-  const [completedHabits, setcompletedHabits] = useState(undefined)
+  const [completedHabits, setcompletedHabits] = useState([])
   const [habitTime, sethabitTime] = useState('')
   const [habitName, sethabitName] = useState('')
+  const [isLoading, setisLoading] = useState(true)
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
   useEffect(() => {
+    console.log('Top of useEffect', isLoading)
+    setisLoading(true)
+    setcompletedHabits([])
     GetOldCompletedHabits(props.date)
-    .then(data =>
-      setcompletedHabits(data))
-  }, [props.date])
+    .then(data =>{
+      setcompletedHabits(data)
+      setisLoading(false)})
+  }, [])
 
   return (
     <>
@@ -31,9 +36,9 @@ export function CompletedModal(props) {
           <Modal.Body>
           <Center>
             <ScrollView horizontal={true}>
-              {completedHabits===undefined ? <Text>Loading Habits</Text> 
-              : completedHabits.length>0 ? completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} backgroundColor={SetCompletedHabitButtonColor(habit.Type)} color="white" onPress={() => {sethabitTime(habit.Time); sethabitName(habit.Name)}}>{habit.Name}</Button>) 
-              : <Button onPress={() => {props.setModalVisible(false)}} colorScheme="secondary" >None today</Button>
+              {isLoading ? <Text>Loading Habits</Text> 
+              : (completedHabits.length>0 ? completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} backgroundColor={SetCompletedHabitButtonColor(habit.Type)} color="white" onPress={() => {sethabitTime(habit.Time); sethabitName(habit.Name)}}>{habit.Name}</Button>) 
+              : <Button onPress={() => {props.setModalVisible(false)}} colorScheme="secondary" >None today</Button>)
               }
             </ScrollView>
           </Center>

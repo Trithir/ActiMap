@@ -39,6 +39,8 @@ WIP
 Released Builds: 
 
   0.2.3
+    Added "Loading Habits" on calendar modal.
+    Completed Habits ReLoad improvement.
 
   0.2.2
     time completed added to button click on completed modal
