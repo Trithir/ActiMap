@@ -99,3 +99,37 @@ To Check Manifest:
   Navigate terminal to D/Downloads.
   run bundletool dump manifest --bundle TriHabits-1cea9516d85a4f8d8913aae2ccf2d504-signed.aab
 
+Pink:
+  Gray 0 0 0 
+  Red 0 0 -90
+  Yellow 0 0 180
+  Green 0 0 90
+Green:
+  Gray 0 90 0
+  Pink 90 0 -90
+  Yellow 0 -90 180
+  Blue -90 0 90
+Gray:
+  Pink 90 0 -180
+  Green 0 -90 90
+  Blue -90 -20 20
+       -90 0 0
+  Red 0 90 -90
+Red:
+  Gray 0 -90 0
+  Blue -90 7 -97
+       -90 0 -90
+  Yellow 0 90 180
+  Pink 90 26 116 
+        90 0 90
+Yellow:
+  Pink 90 65 65
+       90 0 0
+  Red 0 -90 -90 
+  Blue -90 0 180
+  Green 0 90 90
+Blue: 
+  Green 0 180 90
+  Yellow 0 180 -180
+  Red 0 -180 -90
+  Gray 0 -180 0

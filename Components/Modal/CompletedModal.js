@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from "react"
 import { Modal, Button, Center, Text } from "native-base"
 import { ScrollView } from 'react-native';
-import { GetCompletedIDS, GetOldCompletedHabits, GetTimeOfDay, SetCompletedHabitButtonColor } from "../DataFunctions"
+import { GetAllMonthCompletedID, GetCompletedIDS, GetOldCompletedHabits, GetTimeOfDay, SetCompletedHabitButtonColor } from "../DataFunctions"
+import BarChart, { BezierLineCharts } from "./CompletedBarChart";
 
 export function CompletedModal(props) {
   const [completedHabits, setcompletedHabits] = useState([])
@@ -12,7 +13,6 @@ export function CompletedModal(props) {
   const finalRef = useRef(null)
 
   useEffect(() => {
-    console.log('Top of useEffect', isLoading)
     setisLoading(true)
     setcompletedHabits([])
     GetOldCompletedHabits(props.date)
@@ -32,22 +32,27 @@ export function CompletedModal(props) {
         <Modal.Content>
           <Modal.CloseButton />
           <Center>
-          <Modal.Header>Completed {props.date}</Modal.Header>
+            <Modal.Header>Completed {props.date}</Modal.Header>
+          </Center>
           <Modal.Body>
-          <Center>
-            <ScrollView horizontal={true}>
-              {isLoading ? <Text>Loading Habits</Text> 
-              : (completedHabits.length>0 ? completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} backgroundColor={SetCompletedHabitButtonColor(habit.Type)} color="white" onPress={() => {sethabitTime(habit.Time); sethabitName(habit.Name)}}>{habit.Name}</Button>) 
-              : <Button onPress={() => {props.setModalVisible(false)}} colorScheme="secondary" >None today</Button>)
+          <Center> 
+              <ScrollView horizontal={true}>
+                {isLoading ? <Text>Loading Habits</Text> 
+                : (completedHabits.length>0 ? completedHabits.map(habit => <Button key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} backgroundColor={SetCompletedHabitButtonColor(habit.Type)} color="white" onPress={() => {sethabitTime(habit.Time); sethabitName(habit.Name)}}>{habit.Name}</Button>) 
+                : <Button onPress={() => {props.setModalVisible(false)}} colorScheme="secondary" >None today</Button>)
+                }
+              </ScrollView>
+            </Center>
+            <Center>
+              {habitName ?
+                <Text mt={2}>Completed {habitName} at {habitTime}</Text>
+                : ''
               }
-            </ScrollView>
-          </Center>
-          {habitName ?
-            <Text mt={2}>Completed {habitName} at {habitTime}</Text>
-            : ''
-          }
-          </Modal.Body>
-          </Center>
+            </Center>
+            <Center>
+              <BarChart date={props.date}/>
+              </Center>
+            </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               

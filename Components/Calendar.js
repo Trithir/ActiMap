@@ -42,7 +42,7 @@ export default function Calen(props) {
       }
       <Calendar
       onDayPress={(day) => {setModalVisible(true), setpressedDay(day.dateString)}}
-      onDayLongPress={(day) => {console.log('selected day', day, 'long')}}
+      onDayLongPress={(day) => {console.log('LongPress')}}
       markingType={'multi-dot'}
       markedDates={ calendarData }
       minDate={'2021-08-01'}

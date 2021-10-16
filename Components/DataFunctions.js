@@ -27,8 +27,8 @@ const readDB = async () => {
   },
   
   "Completed_Bits":{
-    // "2021-09-03":{"IDS":{"1": '16:10',"2": '8:30'}},
-    // "2021-09-06":{"IDS":[1,2,3]},
+    // "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
+    // "2021-09-22":[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
   }
   }
   } catch(e) {
@@ -81,6 +81,34 @@ export async function GetOldCompletedHabits(date) {
       })
   }
   return []
+}
+// date : "2021-09-04"
+export async function StackedGraphTypeData (date) {
+  let data = await readDB()
+  //take month and search Completed_Bits only in that month
+
+  //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-end
+
+  //each week has 3 types
+
+  //return how many IDs of each type by week
+
+  // P1 40, P2 30, P3 12, P4 24
+  // M1 60, M2 30, M3 7, M4 19
+  // I1 30, I2 60, I3 22, I4 27
+
+  // data: [
+  //   [40, 60, 30 ],  // [P1, M1, I1]
+  //   [30, 30, 60],  // [P2, M2, I2]
+  //   [12, 7, 22],   // [P3, M3, I3]
+  //   [24, 19, 27],  // [P4, M4, I4]
+  // ],
+  return [
+      [40, 60, 30 ],  // [P1, M1, I1]
+      [30, 30, 60],  // [P2, M2, I2]
+      [6, 6, 6],   // [P3, M3, I3]
+      [24, 19, 27],  // [P4, M4, I4]
+    ]
 }
   
 export async function GetPhysicalHabits() {
