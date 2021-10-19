@@ -85,7 +85,10 @@ export async function GetOldCompletedHabits(date) {
 // date : "2021-09-04"
 export async function StackedGraphTypeData (date) {
   let data = await readDB()
+  let ids = GetCompletedIDS(data["Completed_Bits"][date])
+  console.log(ids)
   //take month and search Completed_Bits only in that month
+  month = date.substring(0, 7)
 
   //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-end
 
