@@ -30,10 +30,10 @@ const readDB = async () => {
     // "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
     // "2021-09-22":[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
   }
-  }
-  } catch(e) {
-    // error reading value
-  }
+}
+} catch(e) {
+  // error reading value
+}
 }
 
 export async function ResetDB(cb){
@@ -51,7 +51,7 @@ export async function ResetDB(cb){
   "Completed_Bits":{
     
   }
-  }
+}
   await writeDB(data)
   cb(Math.random())
 }
@@ -82,35 +82,55 @@ export async function GetOldCompletedHabits(date) {
   }
   return []
 }
+
+function IdsToTypeArray(listOfIds, data){
+  if (listOfIds.length == 0) {
+    return []
+  }
+  let pCount = mCount = iCount = 0
+  let listOfTypes = listOfIds.map((id) => GetHabit(id, data).Type)
+
+  for (let i=0; i<listOfTypes.length; i++) {
+    if (listOfTypes[i] == "M") mCount += 1
+    else if (listOfTypes[i] == "P") pCount +=1 
+    else if (listOfTypes[i] == "I") iCount += 1
+  }
+  return [pCount, mCount, iCount]
+}
+
 // date : "2021-09-04"
 export async function StackedGraphTypeData (date) {
   let data = await readDB()
-  let ids = GetCompletedIDS(data["Completed_Bits"][date])
-  console.log(ids)
+  let month = date.substring(0, 7)
+  let week1ids = []
+  let week2ids = []
+  let week3ids = []
+  let week4ids = []
   //take month and search Completed_Bits only in that month
-  month = date.substring(0, 7)
+  let completedThisMonth = (Object.entries(data["Completed_Bits"])).filter((e) => e[0].includes(month))
 
   //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-end
-
-  //each week has 3 types
-
-  //return how many IDs of each type by week
-
-  // P1 40, P2 30, P3 12, P4 24
-  // M1 60, M2 30, M3 7, M4 19
-  // I1 30, I2 60, I3 22, I4 27
-
-  // data: [
-  //   [40, 60, 30 ],  // [P1, M1, I1]
-  //   [30, 30, 60],  // [P2, M2, I2]
-  //   [12, 7, 22],   // [P3, M3, I3]
-  //   [24, 19, 27],  // [P4, M4, I4]
-  // ],
+  for(let i=0; i<completedThisMonth.length; i++) {
+    for (let j=0; j<completedThisMonth[i][1].length; j++) {
+      console.log(completedThisMonth[i][0].substring(8, 10))
+      if(+completedThisMonth[i][0].substring(8, 10)>=1 && +completedThisMonth[i][0].substring(8, 10)<= 8) {
+        week1ids.push(completedThisMonth[i][1][j].ID);
+      } else if(+completedThisMonth[i][0].substring(8, 10) >=9 && +completedThisMonth[i][0].substring(8, 10)<= 15) {
+        week2ids.push(completedThisMonth[i][1][j].ID);
+      } else if(+completedThisMonth[i][0].substring(8, 10) >=16 && +completedThisMonth[i][0].substring(8, 10)<= 23) {
+        week3ids.push(completedThisMonth[i][1][j].ID);
+      } else if(+completedThisMonth[i][0].substring(8, 10) >=24 && +completedThisMonth[i][0].substring(8, 10)<= 31) {
+        week4ids.push(completedThisMonth[i][1][j].ID);
+      }
+    }
+  }
+//each week has 3 types IdsToTypeArray
+//return how many IDs of each type by week IdsToTypeArray
   return [
-      [40, 60, 30 ],  // [P1, M1, I1]
-      [30, 30, 60],  // [P2, M2, I2]
-      [6, 6, 6],   // [P3, M3, I3]
-      [24, 19, 27],  // [P4, M4, I4]
+    IdsToTypeArray(week1ids, data),
+    IdsToTypeArray(week2ids, data),
+    IdsToTypeArray(week3ids, data),
+    IdsToTypeArray(week4ids, data)  
     ]
 }
   
