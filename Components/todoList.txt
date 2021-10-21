@@ -33,6 +33,8 @@ WIP
 
 
 Released Builds: 
+  0.2.4
+    Tapping completed habit displays total amount of times completed
 
   0.2.3
     Added "Loading Habits" on calendar modal.

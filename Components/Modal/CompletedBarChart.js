@@ -19,7 +19,7 @@ export default function BarChart(props) {
 
 return (
   <View styles={styles.container}>
-    <Text style={styles.header}>Weekly Completed by Type</Text>
+    <Text style={styles.header}>Weekly Totals</Text>
     <StackedBarChart
       data={{
         labels: ['Wk 1', 'Wk 2', 'Wk 3', 'Wk 4'],
@@ -29,6 +29,8 @@ return (
       }}
       width={Dimensions.get('window').width - 80}
       height={220}
+      // verticalLabelRotation={0}
+      verticalLabel='Total Completed'
       chartConfig={{
         backgroundColor: '#1cc910',
         backgroundGradientFrom: '#eff3ff',

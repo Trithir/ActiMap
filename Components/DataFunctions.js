@@ -56,12 +56,12 @@ export async function ResetDB(cb){
   cb(Math.random())
 }
 
-function GetHabit(id, data) {
+function GetHabit(ID, data) {
   return (
-    data.Habits[id]
+    data.Habits[ID]
   );
 }
-  
+
 export function GetCurrentDate(){
   let currentDate = new Date();
   let cDay = currentDate.getDate().toString().padStart(2, "0")
@@ -69,7 +69,7 @@ export function GetCurrentDate(){
   let cYear = currentDate.getFullYear().toString()
   return (cYear + "-" + cMonth + "-" + cDay)
 }
-  
+
 export async function GetOldCompletedHabits(date) {
   let data = await readDB()
   if (data.Completed_Bits[date]){
@@ -79,7 +79,7 @@ export async function GetOldCompletedHabits(date) {
         ret.Time=E.Time
         return ret
       })
-  }
+    }
   return []
 }
 
@@ -89,13 +89,28 @@ function IdsToTypeArray(listOfIds, data){
   }
   let pCount = mCount = iCount = 0
   let listOfTypes = listOfIds.map((id) => GetHabit(id, data).Type)
-
+  
   for (let i=0; i<listOfTypes.length; i++) {
     if (listOfTypes[i] == "M") mCount += 1
     else if (listOfTypes[i] == "P") pCount +=1 
     else if (listOfTypes[i] == "I") iCount += 1
   }
   return [pCount, mCount, iCount]
+}
+  
+export async function GetTotalCompleteOfID(ID){
+  //Takes and ID and returns how many times that ID shows up in Completed_Bits
+  //Key:{key:[{key:value, key:value},{key:value, key:value}], key:[{key:value, key:value},{key:value, key:value}]}
+  let data = await readDB()
+  let totalIDCompleted = 0
+  let completedHabitsList = Object.values(data.Completed_Bits)
+  let completedSomethingList = Object.values(completedHabitsList)
+  for(let i=0; i<completedHabitsList.length; i++) {
+    for (let j=0; j<completedHabitsList[i].length; j++) {
+      if (completedHabitsList[i][j].ID == ID) totalIDCompleted += 1
+    }
+  }
+  return totalIDCompleted
 }
 
 // date : "2021-09-04"
@@ -109,10 +124,9 @@ export async function StackedGraphTypeData (date) {
   //take month and search Completed_Bits only in that month
   let completedThisMonth = (Object.entries(data["Completed_Bits"])).filter((e) => e[0].includes(month))
 
-  //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-end
+  //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-31
   for(let i=0; i<completedThisMonth.length; i++) {
     for (let j=0; j<completedThisMonth[i][1].length; j++) {
-      console.log(completedThisMonth[i][0].substring(8, 10))
       if(+completedThisMonth[i][0].substring(8, 10)>=1 && +completedThisMonth[i][0].substring(8, 10)<= 8) {
         week1ids.push(completedThisMonth[i][1][j].ID);
       } else if(+completedThisMonth[i][0].substring(8, 10) >=9 && +completedThisMonth[i][0].substring(8, 10)<= 15) {
