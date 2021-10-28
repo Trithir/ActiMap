@@ -314,6 +314,20 @@ export function GetCompletedIDS(list) {
 export function GetCompletedTime(list, id) {
   return list.filter(day).map((E) => E.ID)
 }
+
+async function HasCompletedAllOfTypeOnDay(type, date) {
+  // If the list of (type) Habits Completed Today matches the list of (type) Today Habits, make dot of habit color
+  let data = await readDB()
+  let currentDate = GetCurrentDate()
+  
+  let ids = GetCompletedIDS(data["Completed_Bits"][currentDate])
+  // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
+  let physHabits = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
+  let mentHabits = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
+  let intaHabits = Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
+  //Loop over physHabits, mentHabits, intaHabits and compare to ids. Remove all matches. If physHabits/mentHabits/inaHabits == 0 return dot data for that type
+}
+
 export async function ConvertCalendarData(cb){
   // "1":{"Name":"Jog","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"
   // New Format "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}],
@@ -326,7 +340,6 @@ export async function ConvertCalendarData(cb){
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
     let ids = GetCompletedIDS(data["Completed_Bits"][date])
-    // console.log(ids)
     let dots = ids.map((i) => GetHabitDotsData(i, data))
     let showDots = []
     let keys = []

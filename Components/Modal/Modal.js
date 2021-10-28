@@ -3,6 +3,7 @@ import { Modal, Button, Input, FormControl } from "native-base"
 import HabitType from "./HabitTypeSelector"
 import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB } from "../DataFunctions"
 import WeekdaySelector from "./WeekdaySelector"
+import moment from 'moment'
 
 export function HabitModal(props) {
   const [habitName, sethabitName] = useState(props.Name)
@@ -30,6 +31,17 @@ export function HabitModal(props) {
     sethabitType(permType)
     sethabitNote('')
     setshowName(false)
+  }
+
+  SetAlarm = async () => {
+    try {
+      // await createAlarm({
+      //     active: false,
+      //     date: moment().format(),
+      //     message: 'message',
+      //     snooze: 1,
+      //   });
+    } catch (e) {}
   }
 
   return (
@@ -64,6 +76,7 @@ export function HabitModal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
+              {/* <Button onPress={() => SetAlarm()}>Alarm</Button> */}
               {props.ID ? 
                 <Button onPress={() => setdeleteText('Hold to Delete')} onLongPress={async () =>{
                   await DeleteHabit(props.ID, props.setrefreshToken)
