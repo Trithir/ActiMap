@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react"
 import { Modal, Button, Input, FormControl } from "native-base"
 import HabitType from "./HabitTypeSelector"
-import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB } from "../DataFunctions"
+import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB, HasCompletedAllOfTypeOnDay } from "../DataFunctions"
 import WeekdaySelector from "./WeekdaySelector"
 import moment from 'moment'
 
@@ -76,7 +76,8 @@ export function HabitModal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              {/* <Button onPress={() => SetAlarm()}>Alarm</Button> */}
+              
+              <Button onPress={() => HasCompletedAllOfTypeOnDay()}>Alarm</Button>
               {props.ID ? 
                 <Button onPress={() => setdeleteText('Hold to Delete')} onLongPress={async () =>{
                   await DeleteHabit(props.ID, props.setrefreshToken)

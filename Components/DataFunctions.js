@@ -315,17 +315,35 @@ export function GetCompletedTime(list, id) {
   return list.filter(day).map((E) => E.ID)
 }
 
-async function HasCompletedAllOfTypeOnDay(type, date) {
+export async function HasCompletedAllOfTypeOnDay(type, date) {
   // If the list of (type) Habits Completed Today matches the list of (type) Today Habits, make dot of habit color
   let data = await readDB()
   let currentDate = GetCurrentDate()
-  
-  let ids = GetCompletedIDS(data["Completed_Bits"][currentDate])
+  let doneIDS = GetCompletedIDS(data["Completed_Bits"][currentDate])
+  let incompletePhys = []
+  let incompleteMent = []
+  let incompleteInta = []
   // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
-  let physHabits = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
-  let mentHabits = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
-  let intaHabits = Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false)
+  let todayPhysHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
+  let todayMentHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
+  let todayIntaHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
   //Loop over physHabits, mentHabits, intaHabits and compare to ids. Remove all matches. If physHabits/mentHabits/inaHabits == 0 return dot data for that type
+  // doneIDS ['4','2','3']
+  // todayPhysHabitIDS []
+  // todayMentHabitIDS ['4']
+  // todayIntaHabitIDS []
+  for(let i=0; i>doneIDS.length; i++){
+    for(let j=0;j>todayPhysHabitIDS.length;j++){
+      if(doneIDS[i] == todayPhysHabitIDS[j]) incompletePhys.push
+    }
+    for(let k=0;k>todayPhysHabitIDS.length;k++){
+      
+    }
+    for(let h=0;h>todayPhysHabitIDS.length;h++){
+      
+    }
+  }
+  console.log(ids, todayMentHabitIDS, todayPhysHabitIDS, todayIntaHabitIDS)
 }
 
 export async function ConvertCalendarData(cb){
