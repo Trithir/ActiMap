@@ -332,18 +332,20 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
   // todayPhysHabitIDS []
   // todayMentHabitIDS ['4']
   // todayIntaHabitIDS []
+
+  //if j > 0 and newtodayPhysHabitIDS.length == todayPhysHabitIDS.length then do a dot
   for(let i=0; i>doneIDS.length; i++){
     for(let j=0;j>todayPhysHabitIDS.length;j++){
       if(doneIDS[i] == todayPhysHabitIDS[j]) incompletePhys.push
     }
-    for(let k=0;k>todayPhysHabitIDS.length;k++){
+    for(let k=0;k>todayMentHabitIDS.length;k++){
       
     }
-    for(let h=0;h>todayPhysHabitIDS.length;h++){
+    for(let h=0;h>todayIntaHabitIDS.length;h++){
       
     }
   }
-  console.log(ids, todayMentHabitIDS, todayPhysHabitIDS, todayIntaHabitIDS)
+  console.log(doneIDS, todayMentHabitIDS, todayPhysHabitIDS, todayIntaHabitIDS)
 }
 
 export async function ConvertCalendarData(cb){
