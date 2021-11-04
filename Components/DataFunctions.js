@@ -320,9 +320,9 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
   let data = await readDB()
   let currentDate = GetCurrentDate()
   let doneIDS = GetCompletedIDS(data["Completed_Bits"][currentDate])
-  let incompletePhys = []
-  let incompleteMent = []
-  let incompleteInta = []
+  let physHabList = []
+  let mentHabList = []
+  let intaHabList = []
   // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
   let todayPhysHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
   let todayMentHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
@@ -333,19 +333,20 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
   // todayMentHabitIDS ['4']
   // todayIntaHabitIDS []
 
-  //if j > 0 and newtodayPhysHabitIDS.length == todayPhysHabitIDS.length then do a dot
-  for(let i=0; i>doneIDS.length; i++){
-    for(let j=0;j>todayPhysHabitIDS.length;j++){
-      if(doneIDS[i] == todayPhysHabitIDS[j]) incompletePhys.push
+  //if j > 0 and physHabList.length == todayPhysHabitIDS.length then do a dot
+  for(let i=0; i<doneIDS.length; i++){
+    for(let j=0;j<todayPhysHabitIDS.length;j++){
+      if(doneIDS[i] == todayPhysHabitIDS[j]) physHabList.push(doneIDS[i])
     }
-    for(let k=0;k>todayMentHabitIDS.length;k++){
-      
+    for(let j=0;j<todayMentHabitIDS.length;j++){
+      if(doneIDS[i] == todayMentHabitIDS[j]) mentHabList.push(doneIDS[i])
     }
-    for(let h=0;h>todayIntaHabitIDS.length;h++){
-      
+    for(let j=0;j<todayIntaHabitIDS.length;j++){
+      if(doneIDS[i] == todayIntaHabitIDS[j]) intaHabList.push(doneIDS[i])
     }
   }
-  console.log(doneIDS, todayMentHabitIDS, todayPhysHabitIDS, todayIntaHabitIDS)
+  //compare lists. Implement functionality similar to convertcalendardata
+  console.log(doneIDS, physHabList, todayMentHabitIDS, mentHabList, intaHabList)
 }
 
 export async function ConvertCalendarData(cb){
