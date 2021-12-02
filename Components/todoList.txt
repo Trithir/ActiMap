@@ -1,40 +1,31 @@
+Commit Message:
+
 Bugs:
   Switching Habit type doesn't refresh new list Habit goes in to.
   Stephen needs to click twice on expand button for it to open.
 
 Feedback:
-  
-Commit Message:
-
-Colors: 
-  P peach: #ff7160
-  M teal: #4bfffb
-  I lellow: #c8ff13
-  purps: #ce2fff
 
 WIP
-
-  All habits completed shows dot (vs any amount completed) 
-    habitDays.length == habitTypeTotal return dot
   Auto scroll to beginning when collapsing show all habits
-  Modal background color to match selected habit type?
   Implement double tap (for something...)
   1 time alert for Updates
   Production build
 
-  Calendar modal ideas:
-    
-    list of [days] a habit was completed
-    % of completes per habit
-    most/least completed
-      average time completed
-    Dots streaks!
+Calendar modal ideas:
+  list of [days] a habit was completed
+  % of completes per habit
+  most/least completed
+    average time completed
+  Dots streaks!
 
 
 
 Released Builds: 
   0.2.4
     Tapping completed habit displays total amount of times completed
+    All habits completed shows dot (vs any amount completed) 
+    Modal background color to match selected habit type?
 
   0.2.3
     Added "Loading Habits" on calendar modal.
@@ -93,6 +84,11 @@ Released Builds:
     HabitButton onPress should toggle completed or not
 
   
+Colors: 
+  P peach: #ff7160
+  M teal: #4bfffb
+  I lellow: #c8ff13
+  purps: #ce2fff
   
 To Check Manifest:
   Navigate terminal to D/Downloads.
