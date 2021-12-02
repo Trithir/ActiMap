@@ -319,10 +319,12 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
   // If the list of (type) Habits Completed Today matches the list of (type) Today Habits, make dot of habit color
   let data = await readDB()
   let currentDate = GetCurrentDate()
-  let doneIDS = GetCompletedIDS(data["Completed_Bits"][currentDate])
-  let physHabList = []
-  let mentHabList = []
-  let intaHabList = []
+  let doneIDS = GetCompletedIDS(data["Completed_Bits"][date])
+  let completedHabitOfTypeList = []
+  let completedPhysHabList = []
+  let completedMentHabList = []
+  let completedIntaHabList = []
+  let todayScheduledHabitIDS = Object.values(data.Habits).filter((H) => H.Type == type).filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
   // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
   let todayPhysHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
   let todayMentHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
@@ -335,18 +337,19 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
 
   //if j > 0 and physHabList.length == todayPhysHabitIDS.length then do a dot
   for(let i=0; i<doneIDS.length; i++){
-    for(let j=0;j<todayPhysHabitIDS.length;j++){
-      if(doneIDS[i] == todayPhysHabitIDS[j]) physHabList.push(doneIDS[i])
-    }
-    for(let j=0;j<todayMentHabitIDS.length;j++){
-      if(doneIDS[i] == todayMentHabitIDS[j]) mentHabList.push(doneIDS[i])
-    }
-    for(let j=0;j<todayIntaHabitIDS.length;j++){
-      if(doneIDS[i] == todayIntaHabitIDS[j]) intaHabList.push(doneIDS[i])
+    for(let j=0;j<todayScheduledHabitIDS.length;j++){
+      if(doneIDS[i] == todayScheduledHabitIDS[j]) completedHabitOfTypeList.push(doneIDS[i])
     }
   }
+
+  if(completedHabitOfTypeList.sort().toString() == todayScheduledHabitIDS.sort().toString()){
+    return true
+  } else return false
+
+  
   //compare lists. Implement functionality similar to convertcalendardata
-  console.log(doneIDS, physHabList, todayMentHabitIDS, mentHabList, intaHabList)
+  // console.log(doneIDS, completedPhysHabList.sort(), todayPhysHabitIDS.sort(), completedMentHabList.sort(), todayMentHabitIDS.sort(), completedIntaHabList.sort(), todayIntaHabitIDS.sort())
+  //if sorted physHabList == sorted todayPhysHabitIDS display phys dot
 }
 
 export async function ConvertCalendarData(cb){
@@ -360,21 +363,45 @@ export async function ConvertCalendarData(cb){
   let dates = Object.keys(data["Completed_Bits"])
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
-    let ids = GetCompletedIDS(data["Completed_Bits"][date])
-    let dots = ids.map((i) => GetHabitDotsData(i, data))
     let showDots = []
-    let keys = []
-    for(let i=0; i<dots.length;i++) {
-      if(showDots.length == 3) {
-        break 
-      }
-      if(!keys.includes(dots[i].key)) { //if keys does not have current key, add current key to keys and showDots
-        keys.push(dots[i].key)
-        showDots.push(dots[i])
-      }
-    }
+    if (await HasCompletedAllOfTypeOnDay('P', date)) {
+      showDots.push({key: 'Physical', color: '#ff7160'}) }
+    if (await HasCompletedAllOfTypeOnDay('M', date)) {
+      showDots.push({key: 'Mental', color: '#4bfffb'}) }
+    if (await HasCompletedAllOfTypeOnDay('I', date)){
+      showDots.push({key: 'Input', color: '#c8ff13'}) }
     ret[date] = {'dots': showDots}
   }
   cb(Math.random())
   return ret
 }
+
+// export async function ConvertCalendarData(cb){
+//   // "1":{"Name":"Jog","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"
+//   // New Format "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}],
+//   // Old Format "2021-09-15":{"IDS":[2,3]}
+//   let data = await readDB()
+//   //completed bits to calendar format
+//   // for each date, loop over each id to find habit type
+//   let ret = {}
+//   let dates = Object.keys(data["Completed_Bits"])
+//   for(let i=0; i<dates.length; i++) {
+//     let date = dates[i]
+//     let ids = GetCompletedIDS(data["Completed_Bits"][date])
+//     let dots = ids.map((i) => GetHabitDotsData(i, data))
+//     let showDots = []
+//     let keys = []
+//     for(let i=0; i<dots.length;i++) {
+//       if(showDots.length == 3) {
+//         break 
+//       }
+//       if(!keys.includes(dots[i].key)) { //if keys does not have current key, add current key to keys and showDots
+//         keys.push(dots[i].key)
+//         showDots.push(dots[i])
+//       }
+//     }
+//     ret[date] = {'dots': showDots}
+//   }
+//   cb(Math.random())
+//   return ret
+// }
