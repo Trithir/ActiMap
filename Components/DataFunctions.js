@@ -99,12 +99,10 @@ function IdsToTypeArray(listOfIds, data){
 }
   
 export async function GetTotalCompleteOfID(ID){
-  //Takes and ID and returns how many times that ID shows up in Completed_Bits
   //Key:{key:[{key:value, key:value},{key:value, key:value}], key:[{key:value, key:value},{key:value, key:value}]}
   let data = await readDB()
   let totalIDCompleted = 0
   let completedHabitsList = Object.values(data.Completed_Bits)
-  let completedSomethingList = Object.values(completedHabitsList)
   for(let i=0; i<completedHabitsList.length; i++) {
     for (let j=0; j<completedHabitsList[i].length; j++) {
       if (completedHabitsList[i][j].ID == ID) totalIDCompleted += 1
@@ -113,7 +111,6 @@ export async function GetTotalCompleteOfID(ID){
   return totalIDCompleted
 }
 
-// date : "2021-09-04"
 export async function StackedGraphTypeData (date) {
   let data = await readDB()
   let month = date.substring(0, 7)
@@ -121,10 +118,8 @@ export async function StackedGraphTypeData (date) {
   let week2ids = []
   let week3ids = []
   let week4ids = []
-  //take month and search Completed_Bits only in that month
   let completedThisMonth = (Object.entries(data["Completed_Bits"])).filter((e) => e[0].includes(month))
 
-  //separate into 4 "weeks" 1-7, 8-15, 16-23, 24-31
   for(let i=0; i<completedThisMonth.length; i++) {
     for (let j=0; j<completedThisMonth[i][1].length; j++) {
       if(+completedThisMonth[i][0].substring(8, 10)>=1 && +completedThisMonth[i][0].substring(8, 10)<= 8) {
@@ -138,8 +133,6 @@ export async function StackedGraphTypeData (date) {
       }
     }
   }
-//each week has 3 types IdsToTypeArray
-//return how many IDs of each type by week IdsToTypeArray
   return [
     IdsToTypeArray(week1ids, data),
     IdsToTypeArray(week2ids, data),
@@ -220,7 +213,6 @@ function IsTodayHabit(habit) {
   return habit.Habit_Days.includes(GetDayOfWeek())
 }
 
-  // "Name":"Jogging","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
 export async function CreateHabit(habit, cb) {
   let data = await readDB()
   habit.Creation_Date = GetCurrentDate()
@@ -233,7 +225,6 @@ export async function CreateHabit(habit, cb) {
 
 export async function EditHabit(habit, cb) {
   if (!habit.ID) throw('EditHabit requies a completed habit.')
-  //updates habit.ID with new info
   let data = await readDB()
   data.Habits[habit.ID]=habit
   await writeDB(data)
@@ -269,11 +260,9 @@ export async function MarkHabitCompleted(id, cb){
 
 export async function UndoHabitCompleted(id, cb){
   let data = await readDB()
-  
   let currentDate = GetCurrentDate()
   data.Completed_Bits[currentDate]= data.Completed_Bits[currentDate].filter((E) => E.ID != id) 
   await writeDB(data)
-  //remove ID from completed date
   cb(Math.random())
 }
 
@@ -293,20 +282,6 @@ export async function ToggleHabitCompleted(id, cb){
   else MarkHabitCompleted(id, cb)
 }
 
-// "Name":"Jogging","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 2 miles < 20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"0"
-function GetHabitDotsData(id, data) {
-  const P = {key: 'Physical', color: '#ff7160'};
-  const M = {key: 'Mental', color: '#4bfffb'};
-  const I = {key: 'Input', color: '#c8ff13'};
-  let type = GetHabit(id, data).Type
-  if (type == "M")
-  return M
-  if (type == "P")
-  return P
-  if (type == "I")
-  return I
-}
-
 export function GetCompletedIDS(list) {
   return list.map((E) => E.ID)
 }
@@ -316,16 +291,10 @@ export function GetCompletedTime(list, id) {
 }
 
 export async function HasCompletedAllOfTypeOnDay(type, date) {
-  // If the list of (type) Habits Completed Today matches the list of (type) Today Habits, make dot of habit color
   let data = await readDB()
   let doneIDS = GetCompletedIDS(data["Completed_Bits"][date])
   let completedHabitOfTypeList = []
   let todayScheduledHabitIDS = Object.values(data.Habits).filter((H) => H.Type == type).filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
-  // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
-  // doneIDS ['4','2','3']
-  // todayPhysHabitIDS []
-  // todayMentHabitIDS ['4']
-  // todayIntaHabitIDS []
 
   for(let i=0; i<doneIDS.length; i++){
     for(let j=0;j<todayScheduledHabitIDS.length;j++){
@@ -339,12 +308,7 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
 }
 
 export async function ConvertCalendarData(cb){
-  // "1":{"Name":"Jog","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"
-  // New Format "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}],
-  // Old Format "2021-09-15":{"IDS":[2,3]}
   let data = await readDB()
-  //completed bits to calendar format
-  // for each date, loop over each id to find habit type
   let ret = {}
   let dates = Object.keys(data["Completed_Bits"])
   for(let i=0; i<dates.length; i++) {
@@ -361,33 +325,3 @@ export async function ConvertCalendarData(cb){
   cb(Math.random())
   return ret
 }
-
-// export async function ConvertCalendarData(cb){
-//   // "1":{"Name":"Jog","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"
-//   // New Format "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}],
-//   // Old Format "2021-09-15":{"IDS":[2,3]}
-//   let data = await readDB()
-//   //completed bits to calendar format
-//   // for each date, loop over each id to find habit type
-//   let ret = {}
-//   let dates = Object.keys(data["Completed_Bits"])
-//   for(let i=0; i<dates.length; i++) {
-//     let date = dates[i]
-//     let ids = GetCompletedIDS(data["Completed_Bits"][date])
-//     let dots = ids.map((i) => GetHabitDotsData(i, data))
-//     let showDots = []
-//     let keys = []
-//     for(let i=0; i<dots.length;i++) {
-//       if(showDots.length == 3) {
-//         break 
-//       }
-//       if(!keys.includes(dots[i].key)) { //if keys does not have current key, add current key to keys and showDots
-//         keys.push(dots[i].key)
-//         showDots.push(dots[i])
-//       }
-//     }
-//     ret[date] = {'dots': showDots}
-//   }
-//   cb(Math.random())
-//   return ret
-// }
