@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react"
-import { Modal, Button, Input, FormControl } from "native-base"
+import { Modal, Button, Input, FormControl, Center } from "native-base"
 import HabitType from "./HabitTypeSelector"
 import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB, HasCompletedAllOfTypeOnDay } from "../DataFunctions"
 import WeekdaySelector from "./WeekdaySelector"
@@ -33,6 +33,19 @@ export function HabitModal(props) {
     setshowName(false)
   }
 
+  
+  switch (habitType) {
+    case 'P': 
+      leftGradient = '#ff7160'
+      break;
+    case 'M':
+      leftGradient = '#4bfffb'
+      break;
+    case 'I':
+      leftGradient = '#c8ff13'
+  }
+  
+
   SetAlarm = async () => {
     try {
       // await createAlarm({
@@ -52,9 +65,18 @@ export function HabitModal(props) {
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
       >
-        <Modal.Content>
+        <Modal.Content 
+        bg={{
+          linearGradient: {
+            colors: [leftGradient, '#ce2fff'],
+            start: [0, 0],
+            end: [1, 0],
+          },
+        }}>
           <Modal.CloseButton />
-          <Modal.Header>Habit Setter!</Modal.Header>
+          <Center>
+            <Modal.Header>Habit Setter!</Modal.Header>
+          </Center>
           <Modal.Body>
             <HabitType sethabitType={sethabitType} Type={habitType}/>
             {/* <Button onPress={() => (console.log(habitType, habitName, habitDays, habitNote), GetDayOfWeek())}>Data?</Button> */}
@@ -77,7 +99,7 @@ export function HabitModal(props) {
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
               
-              <Button onPress={() => HasCompletedAllOfTypeOnDay()}>Alarm</Button>
+              {/* <Button onPress={() => HasCompletedAllOfTypeOnDay()}>Alarm</Button> */}
               {props.ID ? 
                 <Button onPress={() => setdeleteText('Hold to Delete')} onLongPress={async () =>{
                   await DeleteHabit(props.ID, props.setrefreshToken)

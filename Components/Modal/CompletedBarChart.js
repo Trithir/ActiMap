@@ -32,9 +32,8 @@ return (
       // verticalLabelRotation={0}
       verticalLabel='Total Completed'
       chartConfig={{
-        backgroundColor: '#1cc910',
         backgroundGradientFrom: '#eff3ff',
-        backgroundGradientTo: '#efefef',
+        backgroundGradientTo: '#ce2fff',
         decimalPlaces: 2,
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
         style: {

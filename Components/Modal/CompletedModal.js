@@ -37,10 +37,17 @@ export function CompletedModal(props) {
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
       >
-        <Modal.Content>
+        <Modal.Content       
+        bg={{
+          linearGradient: {
+            colors: ['lightBlue.300', '#ce2fff'],
+            start: [0, 0],
+            end: [1, 0],
+          },
+        }}>
           <Modal.CloseButton />
           <Center>
-            <Modal.Header>Completed {props.date}</Modal.Header>
+            <Modal.Header> On this day {props.date}</Modal.Header>
           </Center>
           <Modal.Body>
           <Center> 
@@ -54,7 +61,8 @@ export function CompletedModal(props) {
             </Center>
             <Center>
               {habitName ?
-                <Text mt={2}>{habitName} {habitTotal} times at {habitTime}</Text> //Make say how many times completed
+                <><Text mt={2}>{habitName} completed {habitTotal} times! </Text>
+                <Text>Completed at {habitTime}</Text></>
                 : ''
               }
             </Center>
