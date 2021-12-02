@@ -318,24 +318,15 @@ export function GetCompletedTime(list, id) {
 export async function HasCompletedAllOfTypeOnDay(type, date) {
   // If the list of (type) Habits Completed Today matches the list of (type) Today Habits, make dot of habit color
   let data = await readDB()
-  let currentDate = GetCurrentDate()
   let doneIDS = GetCompletedIDS(data["Completed_Bits"][date])
   let completedHabitOfTypeList = []
-  let completedPhysHabList = []
-  let completedMentHabList = []
-  let completedIntaHabList = []
   let todayScheduledHabitIDS = Object.values(data.Habits).filter((H) => H.Type == type).filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
   // Physical/Mental/Intake Today Habit arrays to compare Completed Habit array with
-  let todayPhysHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "P").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
-  let todayMentHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "M").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
-  let todayIntaHabitIDS = Object.values(data.Habits).filter((H) => H.Type == "I").filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
-  //Loop over physHabits, mentHabits, intaHabits and compare to ids. Remove all matches. If physHabits/mentHabits/inaHabits == 0 return dot data for that type
   // doneIDS ['4','2','3']
   // todayPhysHabitIDS []
   // todayMentHabitIDS ['4']
   // todayIntaHabitIDS []
 
-  //if j > 0 and physHabList.length == todayPhysHabitIDS.length then do a dot
   for(let i=0; i<doneIDS.length; i++){
     for(let j=0;j<todayScheduledHabitIDS.length;j++){
       if(doneIDS[i] == todayScheduledHabitIDS[j]) completedHabitOfTypeList.push(doneIDS[i])
@@ -345,11 +336,6 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
   if(completedHabitOfTypeList.sort().toString() == todayScheduledHabitIDS.sort().toString()){
     return true
   } else return false
-
-  
-  //compare lists. Implement functionality similar to convertcalendardata
-  // console.log(doneIDS, completedPhysHabList.sort(), todayPhysHabitIDS.sort(), completedMentHabList.sort(), todayMentHabitIDS.sort(), completedIntaHabList.sort(), todayIntaHabitIDS.sort())
-  //if sorted physHabList == sorted todayPhysHabitIDS display phys dot
 }
 
 export async function ConvertCalendarData(cb){
