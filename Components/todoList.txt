@@ -21,7 +21,9 @@ Calendar modal ideas:
 
 
 
-Released Builds: 
+Released Builds:
+  0.2.5
+  
   0.2.4
     Tapping completed habit displays total amount of times completed
     All habits completed shows dot (vs any amount completed) 

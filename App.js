@@ -9,6 +9,9 @@ import Mental from './Components/Mental';
 import Intake from './Components/Intake';
 import TopBar from './Components/TopBar';
 import CalendarFiller from './Components/CalendarFiller';
+import PushNotification from "react-native-push-notification";
+import * as Notifications from 'expo-notifications';
+
 
 export default function App() {
   const config = {
