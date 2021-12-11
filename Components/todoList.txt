@@ -1,3 +1,5 @@
+npx react-native start
+
 Commit Message:
 
 Bugs:

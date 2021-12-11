@@ -301,7 +301,8 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
       if(doneIDS[i] == todayScheduledHabitIDS[j]) completedHabitOfTypeList.push(doneIDS[i])
     }
   }
-
+  if(completedHabitOfTypeList.length == 0) 
+    return false
   if(completedHabitOfTypeList.sort().toString() == todayScheduledHabitIDS.sort().toString()){
     return true
   } else return false
