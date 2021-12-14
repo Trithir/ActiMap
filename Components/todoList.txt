@@ -3,6 +3,7 @@ npx react-native start
 Commit Message:
 
 Bugs:
+  Save available habits for each day along with completed ones.
   Switching Habit type doesn't refresh new list Habit goes in to.
   Stephen needs to click twice on expand button for it to open.
 

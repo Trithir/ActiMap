@@ -1,5 +1,6 @@
 import { Box, Button } from 'native-base';
 import React from 'react';
+import RNCalendarEvents from "react-native-calendar-events";
 
 export default function TopBar(){
 
@@ -19,6 +20,9 @@ export default function TopBar(){
           color: "white",
         }}
       >
+        <Button onPress={() => {
+          console.log(RNCalendarEvents)
+          RNCalendarEvents.requestPermissions()}}>Test</Button>
       </Box>
   )
 }
