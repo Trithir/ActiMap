@@ -2,6 +2,29 @@ import { Box, Button } from 'native-base';
 import React from 'react';
 import RNCalendarEvents from "react-native-calendar-events";
 
+
+async function checkPermission() {
+  console.log(await RNCalendarEvents.removeEvent('Title Of Event'))
+  // RNCalendarEvents.saveEvent('Title of event', {
+  //   startDate: '2021-12-23T19:26:00.000Z',
+  //   endDate: '2021-12-23T19:27:00.000Z'
+  // }) 
+
+//  RNCalendarEvents.saveEvent('Title of event', {
+//   startDate: '2016-08-19T19:26:00.000Z',
+//   endDate: '2017-08-19T19:26:00.000Z'
+// })
+  // write_calender = await PermissionsAndroid.WRITE_CALENDAR
+  // read_calender = await PermissionsAndroid.READ_CALENDAR
+  // console.log(write_calender, read_calender,PermissionsAndroid.check(write_calender), PermissionsAndroid.check(read_calender))
+  // if (granted === PermissionsAndroid.check(write_calender) && 
+  //     granted === PermissionsAndroid.check(read_calender)) {
+  //       console.log('You can use the CALENDAR');
+  //     } else {
+  //       console.log('CALENDAR permission denied');
+  //     }
+  }
+
 export default function TopBar(){
 
   return (
@@ -21,8 +44,7 @@ export default function TopBar(){
         }}
       >
         <Button onPress={() => {
-          console.log(RNCalendarEvents)
-          RNCalendarEvents.requestPermissions()}}>Test</Button>
+          checkPermission()}}>Test</Button>
       </Box>
   )
 }

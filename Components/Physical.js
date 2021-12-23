@@ -43,7 +43,7 @@ export default function Physical(props){
       <ScrollView horizontal={true}>
         <NewModalButton setrefreshToken={setrefreshToken} Type={'P'}/>
         {physicalHabits.map(habit => <HabitButton key={habit.ID}  ID={habit.ID} Name={habit.Name} Type={habit.Type} Habit_Days={habit.Habit_Days} Note={habit.Note} Creation_Date={habit.Creation_Date} Deleted={habit.Deleted} setrefreshToken={setrefreshToken}/>)} 
-        <Button colorScheme="green"  onPress={() => { setshowAll(!showAll); setrefreshToken(Math.random()); console.log('test')}}>
+        <Button colorScheme="green"  onPress={() => { setshowAll(!showAll); setrefreshToken(Math.random()); }}>
           {showAll ? 
             <ChevronLeftIcon size="18px" color='white'/>
             :

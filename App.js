@@ -2,16 +2,15 @@ import React from 'react';
 import { StyleSheet} from 'react-native';
 import Calen from './Components/Calendar';
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { useOrientation } from './Components/Orientation'; 
 import { NativeBaseProvider} from "native-base"
 import Physical from './Components/Physical';
 import Mental from './Components/Mental';
 import Intake from './Components/Intake';
 import TopBar from './Components/TopBar';
 import CalendarFiller from './Components/CalendarFiller';
-import PushNotification from "react-native-push-notification";
-import * as Notifications from 'expo-notifications';
+import RNCalendarEvents from 'react-native-calendar-events';
 
+// RNCalendarEvents.authorizationStatus()
 
 export default function App() {
   const config = {
