@@ -4,10 +4,13 @@ import RNCalendarEvents from "react-native-calendar-events";
 
 
 async function checkPermission() {
-  console.log(await RNCalendarEvents.removeEvent('Title Of Event'))
+  // console.log(await RNCalendarEvents.removeEvent('Title Of Event'))
+
+  await RNCalendarEvents.removeEvent('Title Of Event')
+
   // RNCalendarEvents.saveEvent('Title of event', {
-  //   startDate: '2021-12-23T19:26:00.000Z',
-  //   endDate: '2021-12-23T19:27:00.000Z'
+  //   startDate: '2022-01-04T17:34:00.000Z',
+  //   endDate: '2022-01-04T17:35:00.000Z'
   // }) 
 
 //  RNCalendarEvents.saveEvent('Title of event', {
