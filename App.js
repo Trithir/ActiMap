@@ -7,10 +7,6 @@ import Physical from './Components/Physical';
 import Mental from './Components/Mental';
 import Intake from './Components/Intake';
 import TopBar from './Components/TopBar';
-import CalendarFiller from './Components/CalendarFiller';
-import RNCalendarEvents from 'react-native-calendar-events';
-
-// RNCalendarEvents.authorizationStatus()
 
 export default function App() {
   const config = {

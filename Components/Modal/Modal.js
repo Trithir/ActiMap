@@ -1,9 +1,9 @@
 import React, {useState, useRef} from "react"
 import { Modal, Button, Input, FormControl, Center } from "native-base"
 import HabitType from "./HabitTypeSelector"
-import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB, HasCompletedAllOfTypeOnDay } from "../DataFunctions"
+import { CreateHabit, DeleteHabit, EditHabit, GetDayOfWeek, ResetDB } from "../DataFunctions"
 import WeekdaySelector from "./WeekdaySelector"
-import moment from 'moment'
+
 
 export function HabitModal(props) {
   const [habitName, sethabitName] = useState(props.Name)
@@ -43,18 +43,6 @@ export function HabitModal(props) {
       break;
     case 'I':
       leftGradient = '#c8ff13'
-  }
-  
-
-  SetAlarm = async () => {
-    try {
-      // await createAlarm({
-      //     active: false,
-      //     date: moment().format(),
-      //     message: 'message',
-      //     snooze: 1,
-      //   });
-    } catch (e) {}
   }
 
   return (
