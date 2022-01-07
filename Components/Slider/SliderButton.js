@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button } from 'native-base';
+import { Button, Center, Text } from 'native-base';
 import { SliderModal } from './SliderModal';
 import { GetCurrentDate } from '../DataFunctions';
 
@@ -9,13 +9,14 @@ export function SliderModalButton(props){
 return ( 
   <>
     <SliderModal modalVisible={modalVisible} setModalVisible={setModalVisible} date={date} />
-    <Button
-      colorScheme="green"
-      onPress={() => { 
-        setModalVisible(!modalVisible)
-      }}
-    >
-      TriHabit Reminder
-    </Button>
+      <Button
+        w={175}
+        colorScheme="green"
+        onPress={() => { 
+          setModalVisible(!modalVisible)
+        }}
+      >
+        Calendar Reminder:
+      </Button>
   </>
 )}

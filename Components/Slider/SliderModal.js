@@ -1,9 +1,32 @@
 import React, {useState, useRef} from "react"
 import { Modal, Button, FormControl, Center } from "native-base"
 import { SliderThing } from "./Slider"
+import { SaveEvent } from "../Events/SaveEvent"
+import { RemoveEvent } from "../Events/RemoveEvent"
+import { FetchEvents } from "../Events/FetchEvents"
 
-
+// SaveEvent()
+// RemoveEvent()
+// FetchEvents()
 export function SliderModal(props) {
+
+  const [onChangeValue, setOnChangeValue] = React.useState(1)
+  let reminderTime = onChangeValue
+
+  switch (onChangeValue) {
+    case 1: 
+      setOnChangeValue('Off')
+      break;
+    case 2: 
+      setOnChangeValue('Morning')
+      break;
+    case 3: 
+      setOnChangeValue('Afternoon')
+      break;
+    case 4: 
+      setOnChangeValue('Evening')
+      break;
+  }
 
   const initialRef = useRef(null)
   const finalRef = useRef(null)
@@ -30,13 +53,12 @@ export function SliderModal(props) {
           </Center>
           <Modal.Body>
             <FormControl >
-              <SliderThing/>
+              <SliderThing onChangeValue={onChangeValue} setOnChangeValue={setOnChangeValue} />
             </FormControl>
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              <Button onPress={() => console.log('saved reminder placeholder?')}>Set Calendar Reminder</Button>
-              <Button onPress={() => console.log('deleted reminders?')}>Delete Calendar Reminder</Button>
+              <Button onPress={() => SaveEvent()}>Update</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>

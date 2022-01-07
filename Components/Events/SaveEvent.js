@@ -1,19 +1,23 @@
 import RNCalendarEvents from "react-native-calendar-events";
 
-console.log(await RNCalendarEvents.removeEvent('Title Of Event'))
+export async function SaveEvent() {
+  let eventTitle = 'TriHabits'
+  let startDate = '2022-01-07T06:00:00.000Z'
+  let frequency = 'daily'
 
-// async function saveEvent(habitName, startDate, frequency) {
-
-//   await RNCalendarEvents.removeEvent('Title Of Event')
-
-//   RNCalendarEvents.saveEvent(
-//     habitName , 
-//     {
-//     startDate: startDate '2016-08-19T09:30:00.000Z',
-//     notes: 'You Rock!'
-//     }, 
-//     {
-//     frequency: frequency 'daily',
-//     }
-//   ) 
-//   }
+  RNCalendarEvents.saveEvent(
+    eventTitle , 
+    {
+      id: "TriHabits",
+      startDate: startDate,
+      // notes: 'You Rock!'
+      // recurrenceRule: {
+      // frequency: frequency, 
+      // occurrence: 5,
+      // },
+    }, 
+    {
+    sync: true,
+    }
+  ) 
+  }
