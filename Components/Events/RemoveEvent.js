@@ -1,9 +1,7 @@
 import RNCalendarEvents from "react-native-calendar-events";
 
-export async function RemoveEvent() {
-  let eventID = 'TriHabits'
-  let frequency = 'daily'
+export async function RemoveEvent(eventId) {
   
-  RNCalendarEvents.removeEvent(eventID, {sync: true})
+  RNCalendarEvents.removeEvent(eventId)
 
   }

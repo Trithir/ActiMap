@@ -27,8 +27,10 @@ const readDB = async () => {
   },
   
   "Completed_Bits":{
-    // "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
-    // "2021-09-22":[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
+    // "2021-09-04":[{ID: 2, Time: 18:80, AllOfTypeCompleted: false}, {ID: 4, Time: 9:19, AllOfTypeCompleted: true}]
+    // "2021-09-22":{
+      // CompletionEvents:[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
+      // DotsGot:['M', 'I']}
   }
 }
 } catch(e) {
@@ -50,6 +52,11 @@ export async function ResetDB(cb){
   
   "Completed_Bits":{
     
+  },
+
+  "AppSettings":{
+    //which days have which dots
+    //what the reminder status is
   }
 }
   await writeDB(data)
@@ -243,7 +250,11 @@ export async function MarkHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
   let currentTime = GetTimeOfDay()
-  
+  //get type from ID
+  //call HasCompletedAllOfTypeOnDay(type, date)
+  //put data as value AllOfTypeCompleted:
+  //OR//
+  //check if all habits of type have been completed
   if(!data.Completed_Bits){
     data.Completed_Bits = {}
   }

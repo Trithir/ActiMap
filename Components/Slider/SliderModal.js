@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react"
-import { Modal, Button, FormControl, Center } from "native-base"
+import { Modal, Button, FormControl, Center, Text } from "native-base"
 import { SliderThing } from "./Slider"
 import { SaveEvent } from "../Events/SaveEvent"
 import { RemoveEvent } from "../Events/RemoveEvent"
@@ -11,6 +11,7 @@ import { FetchEvents } from "../Events/FetchEvents"
 export function SliderModal(props) {
 
   const [onChangeValue, setOnChangeValue] = React.useState(1)
+  const [eventId, setEventId] = useState(undefined)
   let reminderTime = onChangeValue
 
   switch (onChangeValue) {
@@ -53,12 +54,18 @@ export function SliderModal(props) {
           </Center>
           <Modal.Body>
             <FormControl >
-              <SliderThing onChangeValue={onChangeValue} setOnChangeValue={setOnChangeValue} />
+              {/* <SliderThing onChangeValue={onChangeValue} setOnChangeValue={setOnChangeValue} /> */}
+              <Text>Daily Reminder at 5 PM Pacific time</Text>
             </FormControl>
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              <Button onPress={() => SaveEvent()}>Update</Button>
+              <Button onPress={() => SaveEvent().then((value) => {
+                console.log(value, "save event end log")
+                setEventId(value)
+              }
+              )}>Save</Button>
+              <Button onPress={() => RemoveEvent(eventId)}>Remove</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>
