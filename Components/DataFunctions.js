@@ -27,7 +27,7 @@ const readDB = async () => {
   },
   
   "Completed_Bits":{
-    // "2021-09-04":[{ID: 2, Time: 18:80, AllOfTypeCompleted: false}, {ID: 4, Time: 9:19, AllOfTypeCompleted: true}]
+    // "2021-09-04":[{physCompleteDot: false, mentCompleteDot: false, intCompleteDot: false} {ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
     // "2021-09-22":{
       // CompletionEvents:[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
       // DotsGot:['M', 'I']}
@@ -51,12 +51,13 @@ export async function ResetDB(cb){
   },
   
   "Completed_Bits":{
-    
+ 
   },
 
-  "AppSettings":{
-    //which days have which dots
-    //what the reminder status is
+  "Dotts":{
+    // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: true}
+    // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intCompleteDot: true}
+    // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: false}
   }
 }
   await writeDB(data)
@@ -245,6 +246,28 @@ export async function DeleteHabit(ID, cb) {
   await writeDB(data)
   cb(Math.random())
 }
+// Dotts{
+  // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: true}
+    // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intCompleteDot: true}
+    // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: false}
+// }
+
+function DotSetter(id, data) {
+  let type = id.type
+  if(!data.Dotts){
+    data.Dotts = {physCompleteDot: false, mentCompleteDot: false, intaCompleteDot: false}
+  }
+
+  switch (type) {
+    case "P" : data.Dotts[currentDate].physCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+    case "M" : data.Dotts[currentDate].mentCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+    case "I" : data.Dotts[currentDate].intaCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+  }
+  
+}
 
 export async function MarkHabitCompleted(id, cb){
   let data = await readDB()
@@ -265,6 +288,7 @@ export async function MarkHabitCompleted(id, cb){
   else {
     data.Completed_Bits[currentDate] = [{"ID": id, "Time": currentTime}]
   }
+  DotSetter(id, data)
   await writeDB(data)
   cb(Math.random())
 }
@@ -272,7 +296,8 @@ export async function MarkHabitCompleted(id, cb){
 export async function UndoHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
-  data.Completed_Bits[currentDate]= data.Completed_Bits[currentDate].filter((E) => E.ID != id) 
+  data.Completed_Bits[currentDate]= data.Completed_Bits[currentDate].filter((E) => E.ID != id)
+  DotSetter(id)  
   await writeDB(data)
   cb(Math.random())
 }
@@ -301,8 +326,7 @@ export function GetCompletedTime(list, id) {
   return list.filter(day).map((E) => E.ID)
 }
 
-export async function HasCompletedAllOfTypeOnDay(type, date) {
-  let data = await readDB()
+export async function HasCompletedAllOfTypeOnDay(type, date, data) {
   let doneIDS = GetCompletedIDS(data["Completed_Bits"][date])
   let completedHabitOfTypeList = []
   let todayScheduledHabitIDS = Object.values(data.Habits).filter((H) => H.Type == type).filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
@@ -322,15 +346,16 @@ export async function HasCompletedAllOfTypeOnDay(type, date) {
 export async function ConvertCalendarData(cb){
   let data = await readDB()
   let ret = {}
-  let dates = Object.keys(data["Completed_Bits"])
+  let dates = Object.keys(data["Dotts"])
+  console.log(dates)
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
     let showDots = []
-    if (await HasCompletedAllOfTypeOnDay('P', date)) {
+    if (data.Dotts[date].physCompleteDot) {
       showDots.push({key: 'Physical', color: '#ff7160'}) }
-    if (await HasCompletedAllOfTypeOnDay('M', date)) {
+    if (data.Dotts[date].mentCompleteDot) {
       showDots.push({key: 'Mental', color: '#4bfffb'}) }
-    if (await HasCompletedAllOfTypeOnDay('I', date)){
+    if (data.Dotts[date].intaCompleteDot){
       showDots.push({key: 'Input', color: '#c8ff13'}) }
     ret[date] = {'dots': showDots}
   }
