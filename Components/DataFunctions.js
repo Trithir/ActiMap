@@ -27,10 +27,14 @@ const readDB = async () => {
   },
   
   "Completed_Bits":{
-    // "2021-09-04":[{physCompleteDot: false, mentCompleteDot: false, intCompleteDot: false} {ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
+    // "2021-09-04":[{physCompleteDot: false, mentCompleteDot: false, intaCompleteDot: false} {ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
     // "2021-09-22":{
-      // CompletionEvents:[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
-      // DotsGot:['M', 'I']}
+    // CompletionEvents:[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
+    // DotsGot:['M', 'I']}
+  },
+
+  "Dotts":{
+
   }
 }
 } catch(e) {
@@ -48,18 +52,18 @@ export async function ResetDB(cb){
     {"Name":"Greens","Type":"I","Habit_Days":['Mon', 'Tue', 'Sat'],"Note":"Eat like a rabbit","Deleted":false,"Creation_Date":"2021-09-02","ID":"3"},
     "4":
     {"Name":"Read","Type":"M","Habit_Days":['Sun', 'Tue', 'Fri'],"Note":"Read 1 chapter","Deleted":false,"Creation_Date":"2021-09-01","ID":"4"}
-  },
+    },
+    
+    "Completed_Bits":{
   
-  "Completed_Bits":{
- 
-  },
+    },
 
-  "Dotts":{
-    // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: true}
-    // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intCompleteDot: true}
-    // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: false}
+    "Dotts":{
+      "2022-02-13":{physCompleteDot: true, mentCompleteDot: true, intaCompleteDot: true}
+      // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intaCompleteDot: true}
+      // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intaCompleteDot: false}
+    }
   }
-}
   await writeDB(data)
   cb(Math.random())
 }
@@ -146,7 +150,7 @@ export async function StackedGraphTypeData (date) {
     IdsToTypeArray(week2ids, data),
     IdsToTypeArray(week3ids, data),
     IdsToTypeArray(week4ids, data)  
-    ]
+  ]
 }
   
 export async function GetPhysicalHabits() {
@@ -246,49 +250,22 @@ export async function DeleteHabit(ID, cb) {
   await writeDB(data)
   cb(Math.random())
 }
-// Dotts{
-  // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: true}
-    // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intCompleteDot: true}
-    // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intCompleteDot: false}
-// }
-
-function DotSetter(id, data) {
-  let type = id.type
-  if(!data.Dotts){
-    data.Dotts = {physCompleteDot: false, mentCompleteDot: false, intaCompleteDot: false}
-  }
-
-  switch (type) {
-    case "P" : data.Dotts[currentDate].physCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
-    break;
-    case "M" : data.Dotts[currentDate].mentCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
-    break;
-    case "I" : data.Dotts[currentDate].intaCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
-    break;
-  }
-  
-}
 
 export async function MarkHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
   let currentTime = GetTimeOfDay()
-  //get type from ID
-  //call HasCompletedAllOfTypeOnDay(type, date)
-  //put data as value AllOfTypeCompleted:
-  //OR//
-  //check if all habits of type have been completed
+  
   if(!data.Completed_Bits){
     data.Completed_Bits = {}
   }
-  
   if(data.Completed_Bits[currentDate]) {
     data.Completed_Bits[currentDate].push({"ID": id, "Time": currentTime})
   }
   else {
     data.Completed_Bits[currentDate] = [{"ID": id, "Time": currentTime}]
   }
-  DotSetter(id, data)
+  DotSetter(id, data, currentDate)
   await writeDB(data)
   cb(Math.random())
 }
@@ -297,7 +274,7 @@ export async function UndoHabitCompleted(id, cb){
   let data = await readDB()
   let currentDate = GetCurrentDate()
   data.Completed_Bits[currentDate]= data.Completed_Bits[currentDate].filter((E) => E.ID != id)
-  DotSetter(id)  
+  DotSetter(id, data, currentDate)  
   await writeDB(data)
   cb(Math.random())
 }
@@ -326,11 +303,31 @@ export function GetCompletedTime(list, id) {
   return list.filter(day).map((E) => E.ID)
 }
 
-export async function HasCompletedAllOfTypeOnDay(type, date, data) {
+// Dotts{
+  // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intaCompleteDot: true}
+  // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intaCompleteDot: true}
+  // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intaCompleteDot: false}
+// }
+function DotSetter(id, data, currentDate) {
+  let type = GetHabit(id, data).Type
+  if(!data.Dotts[currentDate]){
+    data.Dotts[currentDate] = {physCompleteDot: false, mentCompleteDot: false, intaCompleteDot: false}
+  }
+  switch (type) {
+    case "P" : data.Dotts[currentDate].physCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+    case "M" : data.Dotts[currentDate].mentCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+    case "I" : data.Dotts[currentDate].intaCompleteDot = HasCompletedAllOfTypeOnDay(type, currentDate, data)
+    break;
+  }
+  
+}
+
+export function HasCompletedAllOfTypeOnDay(type, date, data) {
   let doneIDS = GetCompletedIDS(data["Completed_Bits"][date])
   let completedHabitOfTypeList = []
   let todayScheduledHabitIDS = Object.values(data.Habits).filter((H) => H.Type == type).filter((H) => IsTodayHabit(H)).filter((H) => H.Deleted == false).map((H) => H.ID)
-
   for(let i=0; i<doneIDS.length; i++){
     for(let j=0;j<todayScheduledHabitIDS.length;j++){
       if(doneIDS[i] == todayScheduledHabitIDS[j]) completedHabitOfTypeList.push(doneIDS[i])
@@ -347,15 +344,14 @@ export async function ConvertCalendarData(cb){
   let data = await readDB()
   let ret = {}
   let dates = Object.keys(data["Dotts"])
-  console.log(dates)
   for(let i=0; i<dates.length; i++) {
     let date = dates[i]
     let showDots = []
-    if (data.Dotts[date].physCompleteDot) {
+    if (data["Dotts"][date].physCompleteDot) {
       showDots.push({key: 'Physical', color: '#ff7160'}) }
-    if (data.Dotts[date].mentCompleteDot) {
+    if (data["Dotts"][date].mentCompleteDot) {
       showDots.push({key: 'Mental', color: '#4bfffb'}) }
-    if (data.Dotts[date].intaCompleteDot){
+    if (data["Dotts"][date].intaCompleteDot){
       showDots.push({key: 'Input', color: '#c8ff13'}) }
     ret[date] = {'dots': showDots}
   }

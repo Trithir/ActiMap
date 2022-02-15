@@ -60,9 +60,9 @@ export function SliderModal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              <Button onPress={() => SaveEvent().then((value) => {
-                console.log(value, "save event end log")
-                setEventId(value)
+              <Button onPress={() => SaveEvent().then((eventID) => {
+                console.log(eventID, "save event end log")
+                setEventId(eventID)
               }
               )}>Save</Button>
               <Button onPress={() => RemoveEvent(eventId)}>Remove</Button>
