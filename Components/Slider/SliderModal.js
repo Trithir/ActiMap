@@ -3,7 +3,9 @@ import { Modal, Button, FormControl, Center, Text } from "native-base"
 import { SliderThing } from "./Slider"
 import { SaveEvent } from "../Events/SaveEvent"
 import { RemoveEvent } from "../Events/RemoveEvent"
-import { FetchEvents } from "../Events/FetchEvents"
+import RNCalendarEvents from "react-native-calendar-events";
+import { EventIdSaveToDb } from "../DataFunctions"
+<EventIdSaveToDb></EventIdSaveToDb>
 
 // SaveEvent()
 // RemoveEvent()
@@ -60,12 +62,55 @@ export function SliderModal(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="ghost" space={2}>
-              <Button onPress={() => SaveEvent().then((eventID) => {
+            <Button
+                  title="Check auth"
+                  onPress={() => {
+                    RNCalendarEvents.checkPermissions().then(
+                      (result) => {
+                        console.log('Auth check', result);
+                      },
+                      (result) => {
+                        console.error(result);
+                      },
+                    );
+                  }}
+                >check</Button>
+            <Button
+                  title="Request auth"
+                  onPress={() => {
+                    RNCalendarEvents.requestPermissions().then(
+                      (result) => {
+                        console.log('Auth requested', result);
+                      },
+                      (result) => {
+                        console.error(result);
+                      },
+                    );
+                  }}
+                >req</Button>
+                <Button
+                  title="Find calendars"
+                  onPress={() => {
+                    RNCalendarEvents.findCalendars().then(
+                      (result) => {
+                        console.log(
+                          'Calendars',
+                          result
+                        );
+                      },
+                      (result) => {
+                        console.error(result);
+                      },
+                    );
+                  }}
+                >findCal</Button>
+              <Button onPress={() => SaveEvent().then(async(eventID) => {
+                await RemoveEvent()
                 console.log(eventID, "save event end log")
-                setEventId(eventID)
+                await EventIdSaveToDb(eventID)
               }
               )}>Save</Button>
-              <Button onPress={() => RemoveEvent(eventId)}>Remove</Button>
+              <Button onPress={() => RemoveEvent()}>Remove</Button>
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>

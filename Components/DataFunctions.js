@@ -27,15 +27,15 @@ const readDB = async () => {
   },
   
   "Completed_Bits":{
-    // "2021-09-04":[{physCompleteDot: false, mentCompleteDot: false, intaCompleteDot: false} {ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
-    // "2021-09-22":{
-    // CompletionEvents:[{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}]
-    // DotsGot:['M', 'I']}
+    // "2021-09-04":[{ID: 2, Time: 18:80}, {ID: 4, Time: 9:19}]
+    // "2021-09-22":{ID: 2, Time: 18:80}, {ID: 3, Time: 13:10} {ID: 4, Time: 9:19}
   },
 
   "Dotts":{
 
-  }
+  },
+
+  "EventID": undefined
 }
 } catch(e) {
   // error reading value
@@ -45,7 +45,7 @@ const readDB = async () => {
 export async function ResetDB(cb){
   let data = {"Habits":{
     "1":
-    {"Name":"Jog","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Jog 1 miles < 11 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
+    {"Name":"Walk","Type":"P","Habit_Days":['Mon', 'Tue',],"Note":"Walk 1 miles <20 minutes","Deleted":false,"Creation_Date":"2021-09-02","ID":"1"},
     "2":
     {"Name":"Meditate","Type":"M","Habit_Days":['Tue', 'Wed', 'Thu'],"Note":"Two 3 minute sessions, or one 6 minute session.","Deleted":false,"Creation_Date":"2021-09-01","ID":"2"},
     "3":
@@ -72,6 +72,17 @@ function GetHabit(ID, data) {
   return (
     data.Habits[ID]
   );
+}
+
+export async function EventIdSaveToDb(eventId) {
+  let data = await readDB()
+  data.EventID = eventId
+  await writeDB(data)
+}
+
+export async function FetchEventIdFromDb() {
+  let data = await readDB()
+  return data.EventID
 }
 
 export function GetCurrentDate(){
@@ -303,11 +314,6 @@ export function GetCompletedTime(list, id) {
   return list.filter(day).map((E) => E.ID)
 }
 
-// Dotts{
-  // "2021-09-04":{physCompleteDot: true, mentCompleteDot: false, intaCompleteDot: true}
-  // "2021-09-05":{physCompleteDot: false, mentCompleteDot: true, intaCompleteDot: true}
-  // "2021-09-06":{physCompleteDot: true, mentCompleteDot: false, intaCompleteDot: false}
-// }
 function DotSetter(id, data, currentDate) {
   let type = GetHabit(id, data).Type
   if(!data.Dotts[currentDate]){
